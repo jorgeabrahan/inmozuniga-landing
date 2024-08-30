@@ -1,0 +1,50 @@
+@font-face {
+  font-family: "avenir";
+  src: url("../../assets/fonts/avenir-regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "avenir";
+  src: url("../../assets/fonts/avenir-light.ttf");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "avenir";
+  src: url("../../assets/fonts/avenir-book.ttf");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "avenir";
+  src: url("../../assets/fonts/avenir-heavy.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "avenir";
+  src: url("../../assets/fonts/avenir-black.ttf");
+  font-weight: 900;
+}
+
+html:root {
+  --swiper-theme-color: white;
+  --swiper-pagination-bullet-inactive-color: white;
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+}
+.swiper {
+  user-select: none;
+}
+
+input, select, textarea {
+  outline: none;
+}
+
+select {
+  appearance: none;
+}
+
+textarea {
+  resize: none;
+}

@@ -1,0 +1,16 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["./src/components"],
+      "@page-components/*": ["./src/components/pages/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@icons/*": ["./src/icons/*"],
+      "@images/*": ["./public/assets/images/*"],
+      "@assets/*": ["./public/assets/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@firebase/*": ["./src/firebase/*"],
+    }
+  },
+}

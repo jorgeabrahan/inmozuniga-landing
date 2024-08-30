@@ -1,0 +1,37 @@
+---
+import type { PropertyType } from '@lib/types/PropertyTypes';
+import PropertyImagesSwiper from './PropertyImagesSwiper.astro';
+import PropertyState from './PropertyState.astro';
+import PropertyPrice from './PropertyPrice.astro';
+import PropertyTraits from './PropertyTraits.astro';
+import { PropertyCategoriesDisplayName } from '@lib/enums';
+
+interface Props {
+  property: PropertyType;
+}
+
+const { property } = Astro.props;
+---
+
+<article class="cursor-pointer group" data-id="property" id={property.id}>
+  <div class="relative">
+    <PropertyImagesSwiper
+      propertyImages={property.media.images}
+      propertyName={property.name}
+    />
+    <PropertyState propertyState={property.state} />
+  </div>
+  <div class="py-2">
+    <div class="flex items-center gap-1 justify-between mb-1">
+      <h2 class="text-xl font-bold line-clamp-1">{property.name}</h2>
+      <span class="capitalize text-sm">
+        {PropertyCategoriesDisplayName[property.category]}
+      </span>
+    </div>
+    <PropertyPrice
+      propertyState={property.state}
+      propertyPrice={property.price}
+    />
+    <PropertyTraits property={property} />
+  </div>
+</article>

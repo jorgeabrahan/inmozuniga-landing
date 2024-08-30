@@ -1,0 +1,17 @@
+---
+interface Props {
+  trait: number;
+  title: string;
+}
+
+const { trait, title } = Astro.props;
+---
+
+{trait > 0 && (
+  <div class="flex items-center gap-1" title={title}>
+    <slot />
+    <span class="font-light">
+      {`${trait} `} <slot name="unit-measurement" />
+    </span>
+  </div>
+)}

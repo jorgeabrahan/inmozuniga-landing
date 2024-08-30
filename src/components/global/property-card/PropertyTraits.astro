@@ -1,0 +1,36 @@
+---
+import BedIcon from "@icons/BedIcon.astro";
+import BathroomIcon from "@icons/BathroomIcon.astro";
+import CarIcon from "@icons/CarIcon.astro";
+import RulerIcon from "@icons/RulerIcon.astro";
+import PropertyTrait from "./PropertyTrait.astro";
+import type { PropertyType } from "@lib/types/PropertyTypes";
+interface Props {
+  property: PropertyType;
+}
+const { property } = Astro.props;
+---
+
+<section class="flex items-center gap-3">
+  <PropertyTrait trait={property.traits.bedrooms} title="Habitaciones">
+    <BedIcon size="20px" />
+  </PropertyTrait>
+  <PropertyTrait trait={property.traits.bathrooms} title="Baños">
+    <BathroomIcon size="20px" />
+  </PropertyTrait>
+  <PropertyTrait trait={property.traits.parkingLots} title="Estacionamientos">
+    <CarIcon size="20px" />
+  </PropertyTrait>
+  <PropertyTrait trait={property.measurements.meters} title="Metros de construcción">
+    <RulerIcon size="20px" />
+    <span slot="unit-measurement">m&sup2;</span>
+  </PropertyTrait>
+  {
+    !(property.measurements.meters > 0) && (
+      <PropertyTrait trait={property.measurements.yards} title="Varas de terreno">
+        <RulerIcon size="20px" />
+        <span slot="unit-measurement">v&sup2;</span>
+      </PropertyTrait>
+    )
+  }
+</section>

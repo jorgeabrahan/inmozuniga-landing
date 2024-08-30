@@ -1,0 +1,51 @@
+---
+import Delimiter from "@layouts/Delimiter.astro";
+import Input from "../../../../components/global/fields/Input.astro";
+import Select from "../../../../components/global/fields/Select.astro";
+import Textarea from "src/components/global/fields/Textarea.astro";
+import MainButton from "src/components/global/MainButton.astro";
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<Delimiter className={className}>
+  <form>
+    <h2 class="text-4xl md:text-5xl font-bold md:leading-[3rem] mb-5">
+      Agenda una <span class="text-harvest-gold-600">cita</span>
+    </h2>
+    <p class="text-black-800 text-xl md:text-2xl mb-10 lg:mb-14">
+      Nuestros agentes están listos para ayudarte en todo lo que necesites, no
+      dudes en agendar una cita y te ayudaremos a encontrar la mejor solución
+      para tus necesidades.
+    </p>
+    <div class="flex flex-col gap-6 mb-8">
+      <Input id="name" label="Nombre" />
+      <Input id="phone" type="tel" label="Teléfono" />
+      <Input id="email" type="email" label="Correo electrónico" />
+      <Select
+        id="clientType"
+        label="Tipo de cliente"
+        options={[
+          { value: "particular", label: "Particular" },
+          { value: "inversionista", label: "Inversionista" },
+        ]}
+      />
+      <Select
+        id="purpose"
+        label="Objetivo de la cita"
+        options={[
+          { value: "vender", label: "Vender" },
+          { value: "rentar", label: "Rentar" },
+          { value: "comprar", label: "Comprar" },
+          { value: "asesoria", label: "Asesoría" },
+          { value: "otro", label: "Otro" },
+        ]}
+      />
+      <Textarea id="message" label="Comentario adicional" />
+    </div>
+    <MainButton text="Agendar ahora" />
+  </form>
+</Delimiter>

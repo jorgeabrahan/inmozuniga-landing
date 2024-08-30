@@ -1,0 +1,22 @@
+---
+import "swiper/css/bundle";
+import Layout from "@layouts/Layout.astro";
+import { meta } from "@lib/constants/meta";
+import PropertiesSection from "@page-components/index/properties-section/PropertiesSection.astro";
+import ProjectsSection from "@page-components/index/projects-section/ProjectsSection.astro";
+import QuoterSection from "@page-components/index/quoter-section/QuoterSection.astro";
+import ScheduleAppointmentSection from "@page-components/index/schedule-appointment-section/ScheduleAppointmentSection.astro";
+---
+
+<Layout
+  title={meta.index.title}
+  description={meta.index.description}
+  keywords={meta.index.description}
+>
+  <main>
+    <PropertiesSection className="mb-36" />
+    <QuoterSection className="mb-36" />
+    <ProjectsSection className="mb-36" />
+    <ScheduleAppointmentSection />
+  </main>
+</Layout>

@@ -1,0 +1,50 @@
+---
+import MapPinIcon from "@icons/MapPinIcon.astro";
+import InfoCircleIcon from "@icons/InfoCircleIcon.astro";
+import type { ProjectType } from "@lib/types/ProjectTypes";
+import ProjectCardLink from "./ProjectCardLink.astro";
+import { extractCoordinates, getMapsUrl } from "@lib/utils";
+
+interface Props {
+  project: ProjectType;
+}
+
+const { project } = Astro.props;
+const coords = extractCoordinates(project.location)
+let mapsUrl = null
+if (coords?.latitude != null && coords?.longitude != null) {
+  mapsUrl = getMapsUrl(coords.latitude, coords.longitude)
+}
+---
+
+<article id={project.id} class="cursor-pointer group">
+  <figure
+    class="relative rounded-xl overflow-hidden h-[350px] lg:h-[400px] w-full"
+  >
+    <img
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+      src={project.media.image}
+      alt={project.name}
+    />
+    <figcaption
+      class="absolute top-0 left-0 right-0 px-4 pt-4 pb-10 bg-gradient-to-b from-black/90 to-black/0 text-white"
+    >
+      <h2 class="text-2xl font-bold">{project.name}</h2>
+      <p class="text-sm line-clamp-2 leading-5">{project.description}</p>
+    </figcaption>
+    <div
+      class="absolute bottom-0 left-0 right-0 w-full px-4 pb-4 pt-10 bg-gradient-to-t from-black/70 to-black/0 text-white flex items-center justify-end gap-5"
+    >
+      {mapsUrl && (
+        <ProjectCardLink href={mapsUrl} target="_blank" rel="noopener noreferrer">
+          <MapPinIcon size="20px" />
+          Ubicación
+        </ProjectCardLink>
+      )}
+      <ProjectCardLink href={project.location}>
+        <InfoCircleIcon size="20px" />
+        Detalles
+      </ProjectCardLink>
+    </div>
+  </figure>
+</article>

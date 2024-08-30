@@ -1,0 +1,69 @@
+---
+import Delimiter from "@layouts/Delimiter.astro";
+import MenuIcon from "@icons/MenuIcon.astro";
+import CloseIcon from "@icons/CloseIcon.astro";
+import NavLink from "./NavLink.astro";
+import { links } from "./links";
+---
+
+<header class="py-5 backdrop-blur-md sticky top-0 left-0 z-[300] w-full bg-white/70">
+    <Delimiter className="flex items-center justify-between">
+        <a href="/">
+            <img
+                src="/assets/images/logo/golden-reduced.png"
+                alt="Logo dorado de Inmobiliaria Zúniga y Asoc."
+                class="cursor-pointer w-[140px] transition-[transform] duration-500 ease-out hover:scale-105"
+            />
+        </a>
+        <nav
+            id="menu"
+            class="flex flex-col absolute md:static top-0 left-0 z-[200] md:z-0 bg-black/90 md:bg-transparent text-white md:text-black w-[70%] md:w-full h-screen md:h-auto translate-x-[-100%] md:translate-x-[0] transition-transform md:transition-none duration-500 ease-in-out"
+        >
+            <!-- update grid columns amount in case links length changes -->
+            <ul
+                class="w-full my-auto grid gap-3 md:items-center md:justify-end md:gap-4 md:grid-cols-[repeat(4,120px)] lg:grid-cols-[repeat(4,160px)]"
+            >
+                {
+                    links.map((link) => (
+                        <li>
+                            <NavLink url={link.url} text={link.text} />
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
+        <button id="button-toggle-mobile-menu-open">
+            <MenuIcon id="icon-open-menu" className="md:hidden" size="40" />
+            <CloseIcon id="icon-close-menu" className="hidden md:hidden" size="40" />
+        </button>
+    </Delimiter>
+</header>
+
+<script>
+    const $menu = document.querySelector("#menu") as HTMLElement;
+    const $iconOpenMenu = document.querySelector(
+        "#icon-open-menu",
+    ) as SVGElement;
+    const $iconCloseMenu = document.querySelector(
+        "#icon-close-menu",
+    ) as SVGElement;
+    const $buttonToggleMobileMenuOpen = document.querySelector(
+        "#button-toggle-mobile-menu-open",
+    );
+    const toggleMobileMenuIconVisibility = () => {
+        if ($iconOpenMenu == null || $iconCloseMenu == null) return;
+        $iconCloseMenu.classList.toggle("hidden")
+        $iconOpenMenu.classList.toggle("hidden")
+    };
+    const menuClosedClass = "translate-x-[-100%]";
+    $buttonToggleMobileMenuOpen?.addEventListener("click", () => {
+        if ($menu == null) return;
+        const isMobileMenuClosed = $menu.classList.contains(menuClosedClass);
+        toggleMobileMenuIconVisibility();
+        if (isMobileMenuClosed) {
+            $menu.classList.remove(menuClosedClass);
+            return;
+        }
+        $menu.classList.add(menuClosedClass);
+    });
+</script>

@@ -1,0 +1,27 @@
+---
+interface Props {
+  id?: string;
+  className?: string;
+  size?: string;
+}
+
+const { id, className, size = "24px" } = Astro.props;
+---
+
+<svg
+  id={id}
+  class={className}
+  width={size}
+  height={size}
+  stroke-width="1.5"
+  viewBox="0 0 24 24"
+  fill="none"
+  color="currentColor"
+>
+  <path
+    d="M9 6L15 12L9 18"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"></path>
+</svg>

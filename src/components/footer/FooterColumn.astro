@@ -1,0 +1,26 @@
+---
+export interface Props {
+  title: string;
+  links: Array<{ text: string; url: string }>;
+}
+
+const { title, links } = Astro.props;
+---
+
+<div>
+  <h2 class="text-3xl md:text-2xl uppercase font-bold mb-2">{title}</h2>
+  <ul class="flex flex-col gap-1">
+    {
+      links.map((link) => (
+        <li>
+          <a
+            href={link.url}
+            class="text-xl md:text-lg text-nowrap font-light relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-black before:rounded-full before:transition-[width] before:duration-300 hover:before:w-full"
+          >
+            {link.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

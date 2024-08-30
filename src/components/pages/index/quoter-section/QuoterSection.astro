@@ -1,0 +1,35 @@
+---
+import Delimiter from "@layouts/Delimiter.astro";
+import MainLinkAsButton from "../../../global/MainLinkAsButton.astro";
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<Delimiter
+  className={`grid lg:grid-cols-2 items-center justify-center gap-10 ${className}`}
+>
+  <img
+    class="w-full h-auto lg:min-h-[400px] lg:max-h-full xl:min-h-[500px] rounded-xl shadow-xl object-cover"
+    src="/assets/images/general/finances-quoter.webp"
+    alt="Calculadora y pluma sobre un documento de un balance financiero"
+  />
+  <article>
+    <h2 class="text-4xl md:text-5xl font-bold md:leading-[3rem] mb-5">
+      Cotizador Inmobiliario
+    </h2>
+    <p
+      class="text-black-800 text-lg md:text-xl lg:max-w-[800px] mx-auto mb-10 lg:mb-14"
+    >
+      Utiliza nuestra herramienta de cotización para descubrir de manera rápida
+      y sencilla a qué propiedades y proyectos puedes aplicar.
+      <br />
+      <br />
+      Es una herramienta segura, ya que todos los cálculos se realizan en tu dispositivo
+      y no almacenamos ningún dato ingresado.
+    </p>
+    <MainLinkAsButton url="/cotizacion" text="Comenzar Cotización" />
+  </article>
+</Delimiter>

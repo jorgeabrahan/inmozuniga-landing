@@ -1,0 +1,26 @@
+---
+import FacebookIcon from "@icons/FacebookIcon.astro";
+import FooterIconLink from "./FooterIconLink.astro";
+import { social } from "./constants";
+import InstagramIcon from "@icons/InstagramIcon.astro";
+import WhatsappIcon from "@icons/WhatsappIcon.astro";
+interface Props {
+  className?: string;
+}
+
+const { className } = Astro.props;
+---
+
+<nav class={`${className}`}>
+  <FooterIconLink url={`https://www.facebook.com/${social.facebookUser}`}>
+    <FacebookIcon size="24px" />
+  </FooterIconLink>
+  <FooterIconLink url={`https://www.instagram.com/${social.instagramUser}`}>
+    <InstagramIcon size="24px" />
+  </FooterIconLink>
+  <FooterIconLink
+    url={`https://wa.me/50497842424?text=${encodeURIComponent(social.whatsappMessage)}`}
+  >
+    <WhatsappIcon size="24px" />
+  </FooterIconLink>
+</nav>

@@ -1,0 +1,59 @@
+---
+import Delimiter from "@layouts/Delimiter.astro";
+import FooterColumn from "./FooterColumn.astro";
+import FooterIconsNav from "./FooterIconsNav.astro";
+import { columns } from "./constants";
+import MainLinkAsButton from "../global/MainLinkAsButton.astro";
+---
+
+<footer class="py-20">
+  <Delimiter>
+    <section
+      class="flex flex-col lg:flex-row justify-between gap-10 mb-10 md:mb-20"
+    >
+      <aside class="flex flex-col xl:flex-row items-start xl:gap-20">
+        <div class="flex w-full lg:w-auto justify-between gap-4">
+          <a href="/">
+            <img
+              src="/assets/images/logo/golden.png"
+              alt="Logo blanco de Inmobiliaria Zúniga y Asoc."
+              class="w-[180px] mb-4 transition-[transform] hover:scale-105"
+            />
+          </a>
+          <FooterIconsNav className="flex flex-col lg:hidden gap-3" />
+        </div>
+        <article>
+          <p class="text-xl md:text-lg max-w-[450px] mb-2 font-light">
+            ¡Descubre a qué propiedades y proyectos puedes aplicar con tu
+            salario!
+          </p>
+          <MainLinkAsButton
+            text="Realizar Cotización"
+            url="/"
+            className="font-semibold"
+          />
+        </article>
+      </aside>
+      <div
+        class="grid sm:grid-cols-2 md:grid-cols-3 items-start gap-10 md:gap-20 lg:gap-28"
+      >
+        {
+          columns.map((column) => (
+            <FooterColumn title={column.title} links={column.links} />
+          ))
+        }
+      </div>
+    </section>
+    <section
+      class="grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-2 sm:gap-4"
+    >
+      <FooterIconsNav className="hidden lg:flex gap-3" />
+      <a class="font-light lg:mx-auto" href="/politicas-de-privacidad">
+        Políticas de Privacidad
+      </a>
+      <p class="font-light sm:text-right">
+        &copy; {new Date().getFullYear()} Inmobiliaria Zúniga y Asoc.
+      </p>
+    </section>
+  </Delimite>
+</footer>

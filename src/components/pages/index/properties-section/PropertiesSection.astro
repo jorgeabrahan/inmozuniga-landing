@@ -1,0 +1,42 @@
+---
+import Delimiter from "@layouts/Delimiter.astro";
+import PropertiesSwiper from "./PropertiesSwiper.astro";
+import SectionTitleHeader from "src/components/global/SectionTitleHeader.astro";
+import { PropertyCategories, PropertyStates } from "@lib/enums";
+import { dbGetProperties } from "@firebase/properties";
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+
+const { properties: propertiesForSale } = await dbGetProperties({
+  propertiesLimit: 8,
+  propertyImagesLimit: 3,
+  propertiesCategories: [
+    PropertyCategories.house,
+    PropertyCategories.condominium,
+  ],
+  propertiesStatus: PropertyStates.sale,
+});
+const { properties: propertiesForRent } = await dbGetProperties({
+  propertiesLimit: 8,
+  propertyImagesLimit: 3,
+  propertiesCategories: [
+    PropertyCategories.commercialLocal,
+    PropertyCategories.condominium,
+  ],
+  propertiesStatus: PropertyStates.rent,
+});
+---
+
+<Delimiter className={className}>
+  <SectionTitleHeader
+    subtitle="Explora nuestras propiedades y encuentra el hogar perfecto que se adapte a tus necesidades"
+  >
+    Nuestras <span class="text-harvest-gold-700">propiedades</span>
+  </SectionTitleHeader>
+  <PropertiesSwiper className="mb-6" properties={propertiesForSale} />
+  <PropertiesSwiper properties={propertiesForRent} />
+</Delimiter>

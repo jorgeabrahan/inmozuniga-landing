@@ -1,0 +1,24 @@
+---
+import { dbGetProjects } from "@firebase/projects";
+import Delimiter from "@layouts/Delimiter.astro";
+import ProjectCard from "src/components/global/project-card/ProjectCard.astro";
+import SectionTitleHeader from "src/components/global/SectionTitleHeader.astro";
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+
+const { projects } = await dbGetProjects({ projectsLimit: 3 });
+---
+
+<Delimiter className={className}>
+  <SectionTitleHeader
+    subtitle="Descubre las oportunidades que te esperan en nuestros proyectos inmobiliarios"
+  >
+    Nuestros <span class="text-harvest-gold-700">proyectos</span> inmobiliarios
+  </SectionTitleHeader>
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+    {projects.map((project) => <ProjectCard project={project} />)}
+  </div>
+</Delimiter>

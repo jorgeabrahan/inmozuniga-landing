@@ -1,0 +1,47 @@
+---
+import type { PropertyType } from "@lib/types/PropertyTypes";
+import PropertyCard from "src/components/global/property-card/PropertyCard.astro";
+
+interface Props {
+  properties: PropertyType[];
+  className?: string;
+}
+
+const { properties, className = "" } = Astro.props;
+---
+
+<div class={`swiper properties-swiper py-3 ${className}`}>
+  <div class="swiper-wrapper">
+    {
+      properties.map((property) => (
+        <div class="swiper-slide max-w-[350px]">
+          <PropertyCard property={property} />
+        </div>
+      ))
+    }
+  </div>
+</div>
+<script>
+  import Swiper from "swiper/bundle";
+  new Swiper(".properties-swiper", {
+    cssMode: true,
+    slidesPerView: "auto",
+    spaceBetween: 15,
+  });
+</script>
+
+<script>
+  const propertiesSwiper = document.querySelectorAll(".properties-swiper");
+  propertiesSwiper?.forEach((swiper) => {
+    const properties = swiper?.querySelectorAll(
+      "[data-id='property']",
+    ) as NodeListOf<HTMLElement>;
+
+    properties?.forEach((property) => {
+      property.addEventListener("click", (e) => {
+        if ((e?.target as Element)?.closest(".swiper-pagination")) return;
+        window.location.href = `/propiedades/${property.id}`;
+      });
+    });
+  });
+</script>

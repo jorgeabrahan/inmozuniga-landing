@@ -1,0 +1,55 @@
+---
+interface Props {
+  propertyImages: string[];
+  propertyName: string;
+}
+
+const { propertyImages, propertyName } = Astro.props;
+---
+
+<div class="swiper property-images-swiper user-select-none transition-shadow duration-500 group-hover:shadow-xl">
+  <div class="swiper-wrapper">
+    {propertyImages.map((image) => (
+      <div class="swiper-slide">
+        <img
+          class="h-full w-full object-cover"
+          src={image}
+          alt={propertyName}
+          loading="lazy"
+        />
+        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+      </div>
+    ))}
+  </div>
+  <div class="swiper-pagination" />
+</div>
+
+<style>
+  .swiper {
+    height: 300px;
+    border-radius: 12px;
+  }
+  .swiper-pagination {
+    width: max-content;
+    left: 50%;
+    translate: -50%;
+    bottom: 10px;
+    transition: transform 0.2s ease-in-out;
+  }
+  .swiper-pagination:hover {
+    transform: scale(1.1);
+  }
+</style>
+<script>
+  import Swiper from "swiper/bundle";
+  new Swiper(".property-images-swiper", {
+    cssMode: true,
+    mousewheel: true,
+    slidesPerView: 1,
+    spaceBetween: 15,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+</script>
