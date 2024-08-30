@@ -4,6 +4,7 @@ import PropertiesSwiper from "./PropertiesSwiper.astro";
 import SectionTitleHeader from "src/components/global/SectionTitleHeader.astro";
 import { PropertyCategories, PropertyStates } from "@lib/enums";
 import { dbGetProperties } from "@firebase/properties";
+export const prerender = false;
 
 interface Props {
   className?: string;
