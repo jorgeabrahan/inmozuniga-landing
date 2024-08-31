@@ -43,6 +43,7 @@ input, select, textarea {
 
 select {
   appearance: none;
+  background: transparent;
 }
 
 textarea {

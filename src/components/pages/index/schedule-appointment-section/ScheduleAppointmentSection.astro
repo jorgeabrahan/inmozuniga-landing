@@ -4,13 +4,11 @@ import Input from "../../../../components/global/fields/Input.astro";
 import Select from "../../../../components/global/fields/Select.astro";
 import Textarea from "src/components/global/fields/Textarea.astro";
 import MainButton from "src/components/global/MainButton.astro";
-import YoutubeIcon from "@icons/YoutubeIcon.astro";
-import FacebookIcon from "@icons/FacebookIcon.astro";
-import InstagramIcon from "@icons/InstagramIcon.astro";
-import TikTokIcon from "@icons/TikTokIcon.astro";
 import MapPinIcon from "@icons/MapPinIcon.astro";
 import PhoneIcon from "@icons/PhoneIcon.astro";
 import MailIcon from "@icons/MailIcon.astro";
+import ContactInfoCard from "./ContactInfoCard.astro";
+import WhatsappIcon from "@icons/WhatsappIcon.astro";
 interface Props {
   className?: string;
 }
@@ -18,12 +16,12 @@ interface Props {
 const { className = "" } = Astro.props;
 ---
 
-<Delimiter className={`grid gap-8 ${className}`}>
+<Delimiter className={`flex flex-col lg:flex-row lg:items-start gap-8 ${className}`}>
   <form>
     <h2 class="text-4xl md:text-5xl font-bold md:leading-[3rem] mb-5">
       Agenda una <span class="text-harvest-gold-600">cita</span>
     </h2>
-    <p class="text-black-800 sm:text-lg md:text-xl mb-10 lg:mb-14">
+    <p class="text-black-600 sm:text-lg md:text-xl mb-10 lg:mb-14">
       Nuestros agentes están listos para ayudarte en todo lo que necesites, agenda una cita y te ayudaremos a encontrar la mejor solución para tus necesidades.
     </p>
     <div class="flex flex-col gap-6 mb-8">
@@ -54,41 +52,31 @@ const { className = "" } = Astro.props;
     <MainButton text="Agendar ahora" />
   </form>
   <div class="grid gap-4">
-    <article class="rounded-xl p-4">
-      <header class="flex items-center gap-2 mb-2">
-        <MapPinIcon />
-        <h2 class="text-2xl font-light">Ubicación</h2>
-      </header>
-      <div class="flex flex-col text-black-700 text-sm">
-        <p>21102 San Pedro Sula, Cortés</p>
-        <p>Bo. los Andes, 15 y 16 Avenida, 7 Calle A</p>
-        <a href="#">Ver mapa</a>
-      </div>
-    </article>
-    <article class="rounded-xl p-4">
-      <header class="flex items-center gap-2 mb-2">
-        <PhoneIcon />
-        <h2 class="text-2xl font-light">Teléfonos</h2>
-      </header>
-      <div class="flex flex-col text-black-700 text-sm">
-        <a href="tel:+5042550-0833">+(504) 2550 0833</a>
-        <a href="https://wa.me/50494529498">+(504) 9452 9498</a>
-        <a href="https://wa.me/50497842424">+(504) 9784 2424</a>
-      </div>
-    </article>
-    <article class="rounded-xl p-4">
-      <header class="flex items-center gap-2 mb-2">
-        <MailIcon />
-        <h2 class="text-2xl font-light">Correos</h2>
-      </header>
-      <div class="flex flex-col text-black-700 text-sm">
-        <a href="mailto:inmobiliariazuniga@gmail.com">
-          inmobiliariazuniga@gmail.com
-        </a>
-        <a href="mailto:gerencia.inmobiliariazuniga@gmail.com">
-          gerencia.inmobiliariazuniga@gmail.com
-        </a>
-      </div>
-    </article>
+    <ContactInfoCard title="Ubicación">
+      <MapPinIcon slot="header-icon" />
+      <p>21102 San Pedro Sula, Cortés</p>
+      <p>Barrio los Andes, 15 y 16 Avenida, 7 Calle A</p>
+      <a class="font-semibold lg:hover:pl-2 transition-[padding] ease-in-out" href="#">ver mapa</a>
+    </ContactInfoCard>
+    <ContactInfoCard title="Teléfonos">
+      <PhoneIcon slot="header-icon" />
+      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="tel:+5042550-0833">+(504) 2550 0833</a>
+      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="tel:+5049452-9498">+(504) 9452 9498</a>
+      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="tel:+5049784-2424">+(504) 9784 2424</a>
+    </ContactInfoCard>
+    <ContactInfoCard title="Chat">
+      <WhatsappIcon slot="header-icon" />
+      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="https://wa.me/50494529498">+(504) 9452 9498</a>
+      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="https://wa.me/50497842424">+(504) 9784 2424</a>
+    </ContactInfoCard>
+    <ContactInfoCard title="Correos">
+      <MailIcon slot="header-icon" />
+      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="mailto:inmobiliariazuniga@gmail.com">
+        inmobiliariazuniga@gmail.com
+      </a>
+      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="mailto:gerencia.inmobiliariazuniga@gmail.com">
+        gerencia.inmobiliariazuniga@gmail.com
+      </a>
+    </ContactInfoCard>
   </div>
 </Delimiter>
