@@ -16,13 +16,17 @@ interface Props {
 const { className = "" } = Astro.props;
 ---
 
-<Delimiter className={`flex flex-col lg:flex-row lg:items-start gap-8 ${className}`}>
-  <form>
+<Delimiter
+  className={`flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 ${className}`}
+>
+  <form class="w-full flex-1">
     <h2 class="text-4xl md:text-5xl font-bold md:leading-[3rem] mb-5">
       Agenda una <span class="text-harvest-gold-600">cita</span>
     </h2>
-    <p class="text-black-600 sm:text-lg md:text-xl mb-10 lg:mb-14">
-      Nuestros agentes están listos para ayudarte en todo lo que necesites, agenda una cita y te ayudaremos a encontrar la mejor solución para tus necesidades.
+    <p class="text-black-600 max-w-[800px] sm:text-lg md:text-xl mb-10 lg:mb-14">
+      Nuestros agentes están listos para ayudarte en todo lo que necesites,
+      agenda una cita y te ayudaremos a encontrar la mejor solución para tus
+      necesidades.
     </p>
     <div class="flex flex-col gap-6 mb-8">
       <Input id="name" label="Nombre" />
@@ -51,30 +55,78 @@ const { className = "" } = Astro.props;
     </div>
     <MainButton text="Agendar ahora" />
   </form>
-  <div class="grid gap-4">
+  <div class="grid gap-4 sticky top-32">
     <ContactInfoCard title="Ubicación">
       <MapPinIcon slot="header-icon" />
       <p>21102 San Pedro Sula, Cortés</p>
       <p>Barrio los Andes, 15 y 16 Avenida, 7 Calle A</p>
-      <a class="font-semibold lg:hover:pl-2 transition-[padding] ease-in-out" href="#">ver mapa</a>
+      <a
+        class="font-semibold lg:hover:pl-2 transition-[padding] ease-in-out"
+        href="https://goo.gl/maps/2sgozwHRp9W3FsNQ8"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ver mapa
+      </a>
     </ContactInfoCard>
     <ContactInfoCard title="Teléfonos">
       <PhoneIcon slot="header-icon" />
-      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="tel:+5042550-0833">+(504) 2550 0833</a>
-      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="tel:+5049452-9498">+(504) 9452 9498</a>
-      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="tel:+5049784-2424">+(504) 9784 2424</a>
+      <a
+        class="lg:hover:pl-2 transition-[padding] ease-in-out"
+        href="tel:+5042550-0833"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        +(504) 2550 0833
+      </a>
+      <a
+        class="lg:hover:pl-2 transition-[padding] ease-in-out"
+        href="tel:+5049452-9498"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        +(504) 9452 9498
+      </a>
+      <a
+        class="lg:hover:pl-2 transition-[padding] ease-in-out"
+        href="tel:+5049784-2424"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        +(504) 9784 2424
+      </a>
     </ContactInfoCard>
     <ContactInfoCard title="Chat">
       <WhatsappIcon slot="header-icon" />
-      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="https://wa.me/50494529498">+(504) 9452 9498</a>
-      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="https://wa.me/50497842424">+(504) 9784 2424</a>
+      <a
+        class="lg:hover:pl-2 transition-[padding] ease-in-out"
+        href="https://wa.me/50494529498"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        +(504) 9452 9498
+      </a>
+      <a
+        class="lg:hover:pl-2 transition-[padding] ease-in-out"
+        href="https://wa.me/50497842424"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        +(504) 9784 2424
+      </a>
     </ContactInfoCard>
     <ContactInfoCard title="Correos">
       <MailIcon slot="header-icon" />
-      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="mailto:inmobiliariazuniga@gmail.com">
+      <a
+        class="lg:hover:pl-2 transition-[padding] ease-in-out"
+        href="mailto:inmobiliariazuniga@gmail.com"
+      >
         inmobiliariazuniga@gmail.com
       </a>
-      <a class="lg:hover:pl-2 transition-[padding] ease-in-out" href="mailto:gerencia.inmobiliariazuniga@gmail.com">
+      <a
+        class="lg:hover:pl-2 transition-[padding] ease-in-out"
+        href="mailto:gerencia.inmobiliariazuniga@gmail.com"
+      >
         gerencia.inmobiliariazuniga@gmail.com
       </a>
     </ContactInfoCard>
