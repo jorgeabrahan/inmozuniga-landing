@@ -4,10 +4,6 @@ export const links = [
     text: "Inicio",
   },
   {
-    url: "/contactanos",
-    text: "Contáctanos",
-  },
-  {
     url: "/propiedades",
     text: "Propiedades",
   },

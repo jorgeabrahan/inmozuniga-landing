@@ -1,6 +1,7 @@
 ---
 import { dbGetProjects } from "@firebase/projects";
 import Delimiter from "@layouts/Delimiter.astro";
+import ArrowLink from "src/components/global/ArrowLink.astro";
 import ProjectCard from "src/components/global/project-card/ProjectCard.astro";
 import SectionTitleHeader from "src/components/global/SectionTitleHeader.astro";
 
@@ -19,7 +20,8 @@ const { projects } = await dbGetProjects({ projectsLimit: 3 });
   >
     Nuestros <span class="text-harvest-gold-700">proyectos</span> inmobiliarios
   </SectionTitleHeader>
-  <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4 mb-8">
     {projects.map((project) => <ProjectCard project={project} />)}
   </div>
+  <ArrowLink className="mx-auto" url="/proyectos" text="Ver más Proyectos" />
 </Delimiter>

@@ -1,14 +1,14 @@
 ---
 import Delimiter from "@layouts/Delimiter.astro";
-import Input from "../../../../components/global/fields/Input.astro";
-import Select from "../../../../components/global/fields/Select.astro";
+import ContactInfoCard from "./ContactInfoCard.astro";
+import Input from "src/components/global/fields/Input.astro";
+import Select from "src/components/global/fields/Select.astro";
 import Textarea from "src/components/global/fields/Textarea.astro";
 import MainButton from "src/components/global/MainButton.astro";
 import MapPinIcon from "@icons/MapPinIcon.astro";
-import PhoneIcon from "@icons/PhoneIcon.astro";
-import MailIcon from "@icons/MailIcon.astro";
-import ContactInfoCard from "./ContactInfoCard.astro";
 import WhatsappIcon from "@icons/WhatsappIcon.astro";
+import MailIcon from "@icons/MailIcon.astro";
+import PhoneIcon from "@icons/PhoneIcon.astro";
 interface Props {
   className?: string;
 }
@@ -18,6 +18,7 @@ const { className = "" } = Astro.props;
 
 <Delimiter
   className={`flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 ${className}`}
+  id="contact-section"
 >
   <form class="w-full flex-1">
     <h2 class="text-4xl md:text-5xl font-bold md:leading-[3rem] mb-5">

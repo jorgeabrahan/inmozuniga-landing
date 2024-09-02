@@ -1,0 +1,29 @@
+---
+import Delimiter from "@layouts/Delimiter.astro";
+import ArrowLink from "src/components/global/ArrowLink.astro";
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<Delimiter className={className}>
+  <div class="">
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+      <span class="text-harvest-gold-600">Blog</span> Inmobiliario
+    </h2>
+    <p class="text-black-600 sm:text-lg mb-10">
+      Explora nuestros artículos llenos de recomendaciones y consejos basados en
+      nuestra amplia experiencia en el sector inmobiliario.
+      <br /><br />
+      Encuentra información útil y actualizada para ayudarte en tu búsqueda de propiedades.
+    </p>
+    <ArrowLink
+      url="https://blog.inmozuniga.com"
+      target="_blank"
+      text="Leer blogs"
+      rel="noopener noreferrer"
+    />
+  </div>
+</Delimiter>

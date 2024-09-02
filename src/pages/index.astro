@@ -7,7 +7,8 @@ import { meta } from "@lib/constants/meta";
 import PropertiesSection from "@page-components/index/properties-section/PropertiesSection.astro";
 import ProjectsSection from "@page-components/index/projects-section/ProjectsSection.astro";
 import QuoterSection from "@page-components/index/quoter-section/QuoterSection.astro";
-import ScheduleAppointmentSection from "@page-components/index/schedule-appointment-section/ScheduleAppointmentSection.astro";
+import ContactSection from "@page-components/index/contact-section/ContactSection.astro";
+import BlogSection from "@page-components/index/blog-section/BlogSection.astro";
 ---
 
 <Layout
@@ -16,9 +17,10 @@ import ScheduleAppointmentSection from "@page-components/index/schedule-appointm
   keywords={meta.index.description}
 >
   <main>
-    <PropertiesSection className="mb-36" />
-    <QuoterSection className="mb-36" />
-    <ProjectsSection className="mb-36" />
-    <ScheduleAppointmentSection />
+    <PropertiesSection className="mb-36 xl:mb-56" />
+    <QuoterSection className="mb-36 xl:mb-56" />
+    <ProjectsSection className="mb-36 xl:mb-56" />
+    <ContactSection className="mb-36 xl:mb-56" />
+    <BlogSection />
   </main>
 </Layout>

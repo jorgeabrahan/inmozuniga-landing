@@ -24,10 +24,15 @@ const { title } = Astro.props;
     rootMargin: "0px",
     threshold: 1,
   };
-  const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
       const entryTarget = entry.target as HTMLElement;
       if (!entryTarget) return;
+      const isVisible = entryTarget.style.opacity.trim().length !== 0
+      if (isVisible) {
+        observer.unobserve(entryTarget)
+        return
+      }
       if (entry.isIntersecting) {
         entryTarget.style.opacity = "1";
         return;

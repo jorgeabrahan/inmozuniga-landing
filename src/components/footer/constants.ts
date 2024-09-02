@@ -28,7 +28,7 @@ export const columns = [
     links: [
       { text: "Propiedades", url: "/propiedades" },
       { text: "Proyectos", url: "/proyectos" },
-      { text: "Contáctanos", url: "/contactanos" },
+      { text: "Contáctanos", url: "/#contact-section" },
       { text: "Cotización", url: "/" },
     ],
   }

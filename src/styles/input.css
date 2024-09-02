@@ -28,6 +28,14 @@
   font-weight: 900;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-padding-top: 128px;
+}
+
 html:root {
   --swiper-theme-color: white;
   --swiper-pagination-bullet-inactive-color: white;

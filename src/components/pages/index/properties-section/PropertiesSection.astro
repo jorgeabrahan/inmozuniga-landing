@@ -4,6 +4,7 @@ import PropertiesSwiper from "./PropertiesSwiper.astro";
 import SectionTitleHeader from "src/components/global/SectionTitleHeader.astro";
 import { PropertyCategories, PropertyStates } from "@lib/enums";
 import { dbGetProperties } from "@firebase/properties";
+import ArrowLink from "src/components/global/ArrowLink.astro";
 
 interface Props {
   className?: string;
@@ -38,5 +39,6 @@ const { properties: propertiesForRent } = await dbGetProperties({
     Nuestras <span class="text-harvest-gold-700">propiedades</span>
   </SectionTitleHeader>
   <PropertiesSwiper className="mb-6" properties={propertiesForSale} />
-  <PropertiesSwiper properties={propertiesForRent} />
+  <PropertiesSwiper className="mb-8" properties={propertiesForRent} />
+  <ArrowLink className="mx-auto" url="/propiedades" text="Ver más Propiedades" />
 </Delimiter>
