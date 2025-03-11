@@ -6,6 +6,9 @@ interface ImportMetaEnv {
   readonly FIREBASE_MESSAGING_SENDER_ID: string;
   readonly FIREBASE_APP_ID: string;
   readonly FIREBASE_MEASUREMENT_ID: string;
+
+  readonly PUBLIC_COSMIC_BUCKET_SLUG: string;
+  readonly PUBLIC_COSMIC_READ_KEY: string;
 }
 
 interface ImportMeta {

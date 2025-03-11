@@ -1,0 +1,27 @@
+---
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<div class={className}>
+  <svg viewBox="0 0 1440 320" class="text-harvest-gold-700 -mb-1"
+    ><path
+      fill="currentColor"
+      fill-opacity="1"
+      d="M0,160L120,181.3C240,203,480,245,720,224C960,203,1200,117,1320,74.7L1440,32L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"
+    ></path></svg
+  >
+  <div class="bg-harvest-gold-700 py-10">
+    <slot />
+  </div>
+  <svg viewBox="0 0 1440 320" class="text-harvest-gold-700 -mt-1"
+    ><path
+      fill="currentColor"
+      fill-opacity="1"
+      d="M0,128L120,138.7C240,149,480,171,720,160C960,149,1200,107,1320,85.3L1440,64L1440,0L1320,0C1200,0,960,0,720,0C480,0,240,0,120,0L0,0Z"
+    ></path></svg
+  >
+</div>

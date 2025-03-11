@@ -3,14 +3,14 @@ import MapPinIcon from "@icons/MapPinIcon.astro";
 import InfoCircleIcon from "@icons/InfoCircleIcon.astro";
 import type { ProjectType } from "@lib/types/ProjectTypes";
 import ProjectCardLink from "./ProjectCardLink.astro";
-import { extractCoordinates, getMapsUrl } from "@lib/utils";
+import { extractCoordinatesFromMapsUrl, getMapsUrl } from "@lib/utils";
 
 interface Props {
   project: ProjectType;
 }
 
 const { project } = Astro.props;
-const coords = extractCoordinates(project.location)
+const coords = extractCoordinatesFromMapsUrl(project.location)
 let mapsUrl = null
 if (coords?.latitude != null && coords?.longitude != null) {
   mapsUrl = getMapsUrl(coords.latitude, coords.longitude)

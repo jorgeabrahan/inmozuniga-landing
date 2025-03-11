@@ -1,0 +1,18 @@
+---
+import Delimiter from "@layouts/Delimiter.astro";
+import ContactForm from "./section-contact/ContactForm.astro";
+import ContactInfoCards from "./section-contact/ContactInfoCards.astro";
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+---
+
+<Delimiter
+  className={`flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 ${className}`}
+  id="contact-section"
+>
+  <ContactForm />
+  <ContactInfoCards />
+</Delimiter>

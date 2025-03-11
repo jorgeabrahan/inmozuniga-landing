@@ -1,4 +1,37 @@
 import type { PropertyCategories, PropertyStates } from "@lib/enums";
+import type { TypeCosmicImage, TypeCosmicObject } from "./TypesCosmic";
+import type {
+  PROPERTY_AVAILABILITY,
+  PROPERTY_CATEGORY,
+  PROPERTY_STATUS,
+} from "@lib/constants/property";
+
+export interface TypeProperty {
+  availability: {
+    key: keyof typeof PROPERTY_AVAILABILITY;
+    value: (typeof PROPERTY_AVAILABILITY)[keyof typeof PROPERTY_AVAILABILITY];
+  };
+  category: {
+    key: keyof typeof PROPERTY_CATEGORY;
+    value: (typeof PROPERTY_CATEGORY)[keyof typeof PROPERTY_CATEGORY];
+  };
+  description: string;
+  images: TypeCosmicImage[];
+  location: string;
+  measurements: { rods: number; meters: number };
+  prices: { total: number; installment: number };
+  status: {
+    key: keyof typeof PROPERTY_STATUS;
+    value: (typeof PROPERTY_STATUS)[keyof typeof PROPERTY_STATUS];
+  };
+  traits: {
+    bedrooms: number;
+    bathrooms: number;
+    floors: number;
+    parking_lots: number;
+  };
+}
+export type TypeCosmicProperty = TypeCosmicObject<TypeProperty>;
 
 export type PropertyType = {
   id: string;

@@ -1,8 +1,8 @@
 ---
-import { PropertyStates, PropertyStatesDisplayName } from "@lib/enums";
+import type { PROPERTY_AVAILABILITY } from "@lib/constants/property";
 
 interface Props {
-  propertyState: PropertyStates;
+  propertyState: (typeof PROPERTY_AVAILABILITY)[keyof typeof PROPERTY_AVAILABILITY];
 }
 
 const { propertyState } = Astro.props;
@@ -11,5 +11,5 @@ const { propertyState } = Astro.props;
 <span
   class="absolute z-10 top-4 right-4 text-white bg-black-950/80 px-3 py-1 rounded-lg uppercase text-xs font-semibold"
 >
-  {PropertyStatesDisplayName[propertyState]}
+  {propertyState}
 </span>

@@ -1,9 +1,9 @@
 ---
-import type { PropertyType } from "@lib/types/PropertyTypes";
+import type { TypeCosmicProperty } from "@lib/types/PropertyTypes";
 import PropertyCard from "src/components/global/property-card/PropertyCard.astro";
 
 interface Props {
-  properties: PropertyType[];
+  properties: TypeCosmicProperty[];
   className?: string;
 }
 
@@ -21,6 +21,7 @@ const { properties, className = "" } = Astro.props;
     }
   </div>
 </div>
+
 <script>
   import Swiper from "swiper/bundle";
   new Swiper(".properties-swiper", {

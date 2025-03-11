@@ -2,15 +2,19 @@
 interface Props {
   id: string;
   className?: string;
+  placeholder?: string;
   label?: string;
   rows?: number;
+  required?: boolean;
 }
 
 const {
   id,
   className = "",
+  placeholder = "",
   label = "",
-  rows = 5
+  rows = 5,
+  required = false
 } = Astro.props;
 ---
 
@@ -26,6 +30,7 @@ const {
     spellcheck="false"
     autocomplete="off"
     rows={rows}
-    >
-  </textarea>
+    placeholder={placeholder}
+    required={required}
+    ></textarea>
 </div>

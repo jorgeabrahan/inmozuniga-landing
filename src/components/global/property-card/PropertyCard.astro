@@ -1,36 +1,41 @@
 ---
-import type { PropertyType } from '@lib/types/PropertyTypes';
-import PropertyImagesSwiper from './PropertyImagesSwiper.astro';
-import PropertyState from './PropertyState.astro';
-import PropertyPrice from './PropertyPrice.astro';
-import PropertyTraits from './PropertyTraits.astro';
-import { PropertyCategoriesDisplayName } from '@lib/enums';
+import type { TypeCosmicProperty } from "@lib/types/PropertyTypes";
+import PropertyImagesSwiper from "./PropertyImagesSwiper.astro";
+import PropertyState from "./PropertyState.astro";
+import PropertyPrice from "./PropertyPrice.astro";
+import PropertyTraits from "./PropertyTraits.astro";
 
 interface Props {
-  property: PropertyType;
+  property: TypeCosmicProperty;
 }
 
 const { property } = Astro.props;
 ---
 
-<article class="cursor-pointer group" data-id="property" id={property.id}>
+<article class="cursor-pointer group" data-id="property" id={property.slug}>
   <div class="relative">
     <PropertyImagesSwiper
-      propertyImages={property.media.images}
-      propertyName={property.name}
+      propertyImages={[
+        { url: property.thumbnail },
+        ...property.metadata.images.map((i) => i.image),
+      ]}
+      propertyName={property.title}
     />
-    <PropertyState propertyState={property.state} />
+    <PropertyState propertyState={property.metadata.availability.value} />
   </div>
   <div class="py-2">
     <div class="flex items-center gap-1 justify-between mb-1">
-      <h2 class="text-xl font-bold line-clamp-1">{property.name}</h2>
+      <h2 class="text-xl font-bold line-clamp-1">{property.title}</h2>
       <span class="capitalize text-sm">
-        {PropertyCategoriesDisplayName[property.category]}
+        {property.metadata.category.value}
       </span>
     </div>
     <PropertyPrice
-      propertyState={property.state}
-      propertyPrice={property.price}
+      propertyState={property.metadata.availability.value}
+      propertyPrice={{
+        fee: property.metadata.prices.installment,
+        total: property.metadata.prices.total,
+      }}
     />
     <PropertyTraits property={property} />
   </div>

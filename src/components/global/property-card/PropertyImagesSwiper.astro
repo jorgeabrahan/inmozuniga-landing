@@ -1,27 +1,31 @@
 ---
 interface Props {
-  propertyImages: string[];
+  propertyImages: { url: string }[];
   propertyName: string;
 }
 
 const { propertyImages, propertyName } = Astro.props;
 ---
 
-<div class="swiper property-images-swiper user-select-none transition-shadow duration-500 group-hover:shadow-xl">
+<div
+  class="swiper property-images-swiper user-select-none transition-shadow duration-500 group-hover:shadow-xl"
+>
   <div class="swiper-wrapper">
-    {propertyImages.map((image) => (
-      <div class="swiper-slide">
-        <img
-          class="h-full w-full object-cover"
-          src={image}
-          alt={propertyName}
-          loading="lazy"
-        />
-        <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-      </div>
-    ))}
+    {
+      propertyImages.map((image) => (
+        <div class="swiper-slide">
+          <img
+            class="h-full w-full object-cover"
+            src={image.url}
+            alt={propertyName}
+            loading="lazy"
+          />
+          <div class="swiper-lazy-preloader swiper-lazy-preloader-white" />
+        </div>
+      ))
+    }
   </div>
-  <div class="swiper-pagination" />
+  <div class="swiper-pagination"></div>
 </div>
 
 <style>

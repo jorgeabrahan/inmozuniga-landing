@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["avenir", "sans-serif"],
+        emphasis: ["Space Grotesk", "sans-serif"],
       },
       colors: {
         "harvest-gold": {

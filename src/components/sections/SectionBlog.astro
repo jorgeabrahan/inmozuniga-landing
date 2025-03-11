@@ -1,6 +1,7 @@
 ---
 import Delimiter from "@layouts/Delimiter.astro";
 import ArrowLink from "src/components/global/ArrowLink.astro";
+import WrapperWaves from "./section-blog/WrapperWaves.astro";
 interface Props {
   className?: string;
 }
@@ -8,12 +9,12 @@ interface Props {
 const { className = "" } = Astro.props;
 ---
 
-<Delimiter className={className}>
-  <div class="">
-    <h2 class="text-4xl md:text-5xl font-bold mb-4">
-      <span class="text-harvest-gold-600">Blog</span> Inmobiliario
+<WrapperWaves className={className}>
+  <Delimiter>
+    <h2 class="text-4xl md:text-5xl text-white font-bold mb-6">
+      Nuestro <span class="text-harvest-gold-400">Blog</span>
     </h2>
-    <p class="text-black-600 sm:text-lg mb-10">
+    <p class="text-white/80 sm:text-2xl mb-10">
       Explora nuestros artículos llenos de recomendaciones y consejos basados en
       nuestra amplia experiencia en el sector inmobiliario.
       <br /><br />
@@ -24,6 +25,7 @@ const { className = "" } = Astro.props;
       target="_blank"
       text="Leer blogs"
       rel="noopener noreferrer"
+      isBackgroundDark
     />
-  </div>
-</Delimiter>
+  </Delimiter>
+</WrapperWaves>

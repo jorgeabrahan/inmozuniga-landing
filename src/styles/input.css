@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+
 @font-face {
   font-family: "avenir";
   src: url("../../assets/fonts/avenir-regular.ttf");
@@ -45,7 +47,9 @@ html:root {
   user-select: none;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   outline: none;
 }
 
@@ -56,4 +60,40 @@ select {
 
 textarea {
   resize: none;
+}
+
+.iti {
+  width: 100%;
+}
+
+.iti--inline-dropdown .iti__dropdown-content {
+  width: 350px !important;
+  @apply z-[1000] mt-2 border border-black-800/50 shadow-none;
+}
+
+.iti__selected-country-primary:hover,
+.iti__selected-country:has(+ .iti__dropdown-content:hover)
+  .iti__selected-country-primary {
+  background-color: transparent !important;
+}
+
+.iti__country-list {
+  overflow-y: auto;
+  scrollbar-color: #c58700 transparent;
+}
+
+.iti--inline-dropdown .iti__dropdown-content .iti__search-input {
+  @apply p-4 text-sm;
+}
+.iti__country-list .iti__country .iti__country-name {
+  @apply text-sm text-black-800;
+}
+.iti__country-list .iti__country .iti__dial-code {
+  @apply text-sm text-black-300;
+}
+.iti__country-list .iti__country .iti__dial-code::before {
+  content: "(";
+}
+.iti__country-list .iti__country .iti__dial-code::after {
+  content: ")";
 }

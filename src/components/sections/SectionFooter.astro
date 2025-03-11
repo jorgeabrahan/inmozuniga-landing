@@ -1,9 +1,9 @@
 ---
 import Delimiter from "@layouts/Delimiter.astro";
-import FooterColumn from "./FooterColumn.astro";
-import FooterIconsNav from "./FooterIconsNav.astro";
-import { columns } from "./constants";
 import MainLinkAsButton from "../global/MainLinkAsButton.astro";
+import FooterIconsNav from "./section-footer/FooterIconsNav.astro";
+import FooterColumn from "./section-footer/FooterColumn.astro";
+import { columns } from "./section-footer/constants";
 ---
 
 <footer class="py-20">
@@ -55,5 +55,5 @@ import MainLinkAsButton from "../global/MainLinkAsButton.astro";
         &copy; {new Date().getFullYear()} Inmobiliaria Zúniga y Asoc.
       </p>
     </section>
-  </Delimite>
+  </Delimiter>
 </footer>

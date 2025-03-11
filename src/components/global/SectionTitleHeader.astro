@@ -10,7 +10,9 @@ const { subtitle } = Astro.props;
   <h2 class="text-4xl md:text-5xl font-bold capitalize">
     <slot />
   </h2>
-  <p class="text-black-600/80 text-sm md:text-lg max-w-[800px] mx-auto">
+  <p
+    class="text-black-600/80 text-center text-sm md:text-lg max-w-[800px] mx-auto"
+  >
     {subtitle}
   </p>
 </header>

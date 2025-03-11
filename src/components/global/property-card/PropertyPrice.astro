@@ -1,13 +1,14 @@
 ---
-import { PropertyStates } from '@lib/enums';
-import { formatUSDCurrency } from '@lib/utils';
+import { PROPERTY_AVAILABILITY } from "@lib/constants/property";
+import { PropertyStates } from "@lib/enums";
+import { formatAsUSDCurrency } from "@lib/utils";
 
 interface Props {
-  propertyState: string;
+  propertyState: (typeof PROPERTY_AVAILABILITY)[keyof typeof PROPERTY_AVAILABILITY];
   propertyPrice: {
     fee: number;
     total: number;
-  }
+  };
 }
 
 const { propertyState, propertyPrice } = Astro.props;
@@ -15,12 +16,12 @@ const { propertyState, propertyPrice } = Astro.props;
 
 <div class="mb-1 flex flex-col">
   <p class="font-light capitalize text-xs leading-[8px]">
-    {propertyState === PropertyStates.rent ? "Cuota" : "Costo total"}
+    {propertyState === PROPERTY_AVAILABILITY.rent ? "Cuota" : "Costo total"}
   </p>
   <p class="text-2xl font-light">
     {
-      formatUSDCurrency(
-        propertyState === PropertyStates.rent
+      formatAsUSDCurrency(
+        propertyState === PROPERTY_AVAILABILITY.rent
           ? propertyPrice.fee
           : propertyPrice.total,
       )
