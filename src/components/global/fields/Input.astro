@@ -1,9 +1,7 @@
 ---
-import type { WriteInputTypeAttributeType } from "@lib/types";
-
 interface Props {
   id: string;
-  type?: WriteInputTypeAttributeType;
+  type?: astroHTML.JSX.HTMLInputTypeAttribute;
   className?: string;
   placeholder?: string;
   label?: string;
@@ -21,8 +19,9 @@ const {
 ---
 
 <div class="relative w-full">
-  <label class="absolute top-0 left-4 z-10 -translate-y-[45%] bg-white text-black-800 px-2 text-sm" for={id}
-    >{label}</label
+  <label
+    class="absolute top-0 left-4 z-10 -translate-y-[45%] bg-white text-black-800 px-2 text-sm"
+    for={id}>{label}</label
   >
   <input
     id={id}

@@ -1,7 +1,6 @@
 ---
 import { PROPERTY_AVAILABILITY } from "@lib/constants/property";
-import { PropertyStates } from "@lib/enums";
-import { formatAsUSDCurrency } from "@lib/utils";
+import { UtilsFormat } from "@lib/utils/UtilsFormat";
 
 interface Props {
   propertyState: (typeof PROPERTY_AVAILABILITY)[keyof typeof PROPERTY_AVAILABILITY];
@@ -20,7 +19,7 @@ const { propertyState, propertyPrice } = Astro.props;
   </p>
   <p class="text-2xl font-light">
     {
-      formatAsUSDCurrency(
+      UtilsFormat.asCurrency(
         propertyState === PROPERTY_AVAILABILITY.rent
           ? propertyPrice.fee
           : propertyPrice.total,

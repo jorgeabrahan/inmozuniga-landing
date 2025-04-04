@@ -52,9 +52,9 @@ import MainButton from "src/components/global/MainButton.astro";
 </form>
 
 <script>
-  import { toast } from 'sonner'
+  import { toast } from "sonner";
   import { intlTelInputSettings } from "@lib/constants";
-  import { formatEmail, formatName } from '@lib/utils';
+  import { UtilsFormat } from "@lib/utils/UtilsFormat";
 
   const contactForms = document.querySelectorAll(
     "form[data-id='contact-form']",
@@ -65,23 +65,22 @@ import MainButton from "src/components/global/MainButton.astro";
     contactForm.addEventListener("submit", (e) => {
       e.preventDefault();
       if (!e.target) return;
-      // extract data from form
       const data = Object.fromEntries(
         new FormData(e.target as HTMLFormElement),
-      );
-
-      // validate data
+      ) as {
+        name: string;
+        phone: string;
+        email: string;
+      };
       if (!intl.isValidNumber()) {
-        toast.error('Numero de teléfono invalido')
-        return
+        toast.error("Numero de teléfono invalido");
+        return;
       }
-
-      // format data correctly
-      data.name = formatName(data.name as string)
+      data.name = UtilsFormat.capitalize(data.name);
       data.phone = intl.getNumber();
-      data.email = formatEmail(data.email as string);
+      data.email = data.email.trim().toLowerCase();
 
-      // send data to marketing email
+      // TODO: send data to email marketing
     });
   });
 </script>

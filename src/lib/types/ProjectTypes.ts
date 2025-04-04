@@ -4,6 +4,8 @@ import type {
   ProjectStageTypes,
 } from "@lib/enums";
 
+/* TODO: remove this after defining how the stages of the project will be managed */
+
 type ProjectLot = {
   financiar: string;
   tipo: ProjectLotTypes;
@@ -36,14 +38,4 @@ export type ProjectType = {
   name: string;
   income: number;
   stages: ProjectStage[];
-};
-
-export type DBProjectType = {
-  id: string;
-  descripcion: string;
-  ubicacion: string;
-  video: string;
-  nombre: string;
-  ingreso: string;
-  etapas: ProjectStage[];
 };
