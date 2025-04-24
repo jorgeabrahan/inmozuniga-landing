@@ -1,5 +1,3 @@
-import React from "react";
-
 interface NavArrowDownIconProps {
   id?: string;
   className?: string;
