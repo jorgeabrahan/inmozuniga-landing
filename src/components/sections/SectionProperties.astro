@@ -4,7 +4,7 @@ import SectionTitleHeader from "src/components/global/SectionTitleHeader.astro";
 import ArrowLink from "src/components/global/ArrowLink.astro";
 import PropertiesSwiper from "./section-properties/PropertiesSwiper.astro";
 import { ServiceProperties } from "src/services/ServiceProperties";
-import { PROPERTY_AVAILABILITY } from "@lib/constants/property";
+import { PROPERTY_AVAILABILITY_KEYS } from "@lib/constants/property";
 
 interface Props {
   className?: string;
@@ -13,10 +13,10 @@ interface Props {
 const { className = "" } = Astro.props;
 
 const { data: propertiesForSale } = await ServiceProperties.getProperties({
-  availabilityValue: PROPERTY_AVAILABILITY.sale,
+  availability: PROPERTY_AVAILABILITY_KEYS.sale,
 });
 const { data: propertiesForRent } = await ServiceProperties.getProperties({
-  availabilityValue: PROPERTY_AVAILABILITY.rent,
+  availability: PROPERTY_AVAILABILITY_KEYS.rent,
 });
 ---
 

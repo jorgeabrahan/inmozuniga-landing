@@ -6,20 +6,18 @@ import { links } from "./section-navbar/links";
 import NavLink from "./section-navbar/NavLink.astro";
 ---
 
-<header
-  class="py-5 backdrop-blur-md sticky top-0 left-0 z-[300] w-full bg-white/70"
->
+<header class="py-5 sticky top-0 left-0 z-[300] w-full bg-white">
   <Delimiter className="flex items-center justify-between">
     <a href="/">
       <img
         src="/assets/images/logo/golden-reduced.png"
         alt="Logo dorado de Inmobiliaria Zúniga y Asoc."
-        class="cursor-pointer w-[100px] md:w-[140px] transition-[transform] duration-500 ease-out hover:scale-105"
+        class="cursor-pointer w-[80px] md:min-w-[110px] md:max-w-[110px] transition-[transform] duration-500 ease-out hover:scale-105"
       />
     </a>
     <nav
       id="menu"
-      class="flex flex-col absolute md:static top-0 left-0 z-[200] md:z-0 bg-black/90 md:bg-transparent text-white md:text-black w-[70%] md:w-full h-screen md:h-auto translate-x-[-100%] md:translate-x-[0] transition-transform md:transition-none duration-500 ease-in-out"
+      class="flex flex-col absolute md:static top-0 left-0 z-[200] md:z-0 bg-black/95 md:bg-transparent text-white md:text-black w-[70%] md:w-full h-screen md:h-auto translate-x-[-100%] md:translate-x-[0] transition-transform md:transition-none duration-500 ease-in-out"
     >
       <ul
         class={`w-full my-auto grid gap-3 md:items-center md:justify-end md:gap-4 md:grid-cols-[repeat(3,120px)] lg:grid-cols-[repeat(3,160px)]`}
@@ -33,9 +31,12 @@ import NavLink from "./section-navbar/NavLink.astro";
         }
       </ul>
     </nav>
-    <button id="button-toggle-mobile-menu-open">
-      <MenuIcon id="icon-open-menu" className="md:hidden" size="40" />
-      <CloseIcon id="icon-close-menu" className="hidden md:hidden" size="40" />
+    <button
+      class="rounded-full p-3 bg-harvest-gold-700 text-white md:hidden"
+      id="button-toggle-mobile-menu-open"
+    >
+      <MenuIcon id="icon-open-menu" size="26px" />
+      <CloseIcon id="icon-close-menu" className="hidden" size="26px" />
     </button>
   </Delimiter>
 </header>

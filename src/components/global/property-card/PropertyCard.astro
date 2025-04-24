@@ -1,9 +1,12 @@
 ---
 import type { TypeCosmicProperty } from "@lib/types/Database";
+import { generatePropertyWaUrl } from "@lib/utils/generateUrl";
 import PropertyImagesSwiper from "./PropertyImagesSwiper.astro";
 import PropertyState from "./PropertyState.astro";
 import PropertyPrice from "./PropertyPrice.astro";
 import PropertyTraits from "./PropertyTraits.astro";
+import PhoneIcon from "@icons/PhoneIcon.astro";
+import MessageTextIcon from "@icons/MessageTextIcon.astro";
 
 interface Props {
   property: TypeCosmicProperty;
@@ -22,6 +25,22 @@ const { property } = Astro.props;
       propertyName={property.title}
     />
     <PropertyState propertyState={property.metadata.availability.value} />
+    <div class="absolute top-3 left-4 z-10 flex items-stretch gap-2">
+      <a
+        href={`tel:+${property.metadata.agent_phone_number}`}
+        class="bg-black-950/80 text-white backdrop-blur-lg rounded-full p-2"
+      >
+        <PhoneIcon strokeWidth="2" size="14px" />
+      </a>
+      <a
+        href={generatePropertyWaUrl(property)}
+        target="_blank"
+        class="bg-black-950/80 text-white backdrop-blur-lg rounded-full py-2 px-4 flex items-center gap-2 font-semibold"
+      >
+        <MessageTextIcon strokeWidth="2" size="14px" />
+        <span class="text-[10px]">Mensaje</span>
+      </a>
+    </div>
   </div>
   <div class="py-2">
     <div class="flex items-center gap-1 justify-between mb-1">

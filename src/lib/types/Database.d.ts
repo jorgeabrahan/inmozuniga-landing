@@ -3,6 +3,14 @@ import type {
   PROPERTY_CATEGORY,
   PROPERTY_STATUS,
 } from "@lib/constants/property";
+import type {
+  TypePropertyAvailability,
+  TypePropertyAvailabilityKey,
+  TypePropertyCategory,
+  TypePropertyCategoryKey,
+  TypePropertyStatus,
+  TypePropertyStatusKey,
+} from "./Application";
 
 export interface TypeCosmicObject<T> {
   slug: string;
@@ -18,21 +26,22 @@ export interface TypeCosmicImage {
 
 export interface TypeProperty {
   availability: {
-    key: keyof typeof PROPERTY_AVAILABILITY;
-    value: (typeof PROPERTY_AVAILABILITY)[keyof typeof PROPERTY_AVAILABILITY];
+    key: TypePropertyAvailabilityKey;
+    value: TypePropertyAvailability;
   };
   category: {
-    key: keyof typeof PROPERTY_CATEGORY;
-    value: (typeof PROPERTY_CATEGORY)[keyof typeof PROPERTY_CATEGORY];
+    key: TypePropertyCategoryKey;
+    value: TypePropertyCategory;
   };
   description: string;
   images: TypeCosmicImage[];
   location: string;
+  agent_phone_number: string;
   measurements: { rods: number; meters: number };
   prices: { total: number; installment: number };
   status: {
-    key: keyof typeof PROPERTY_STATUS;
-    value: (typeof PROPERTY_STATUS)[keyof typeof PROPERTY_STATUS];
+    key: TypePropertyStatusKey;
+    value: TypePropertyStatus;
   };
   traits: {
     bedrooms: number;

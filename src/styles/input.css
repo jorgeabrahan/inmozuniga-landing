@@ -46,6 +46,12 @@ html:root {
 .swiper {
   user-select: none;
 }
+.swiper-pagination {
+  transition: transform 0.2s ease-in-out !important;
+}
+.swiper-pagination:hover {
+  transform: scale(1.1);
+}
 
 input,
 select,
@@ -96,4 +102,37 @@ textarea {
 }
 .iti__country-list .iti__country .iti__dial-code::after {
   content: ")";
+}
+
+.backdrop-fade-in {
+  animation: backdropFadeIn 300ms ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 100ms;
+}
+.backdrop-fade-out {
+  animation: backdropFadeOut 300ms ease-in-out;
+  animation-fill-mode: forwards;
+  animation-delay: 100ms;
+}
+
+@keyframes backdropFadeIn {
+  0% {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+}
+
+@keyframes backdropFadeOut {
+  0% {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(0);
+  }
 }

@@ -1,14 +1,37 @@
 ---
+import SectionPropertyFilters from "src/components/page/properties/SectionPropertyFilters";
+import SectionMobilePropertyFilters from "src/components/page/properties/SectionMobilePropertyFilters";
+import SectionProperties from "src/components/page/properties/SectionProperties";
 import Layout from "../layouts/Layout.astro";
 import { meta } from "../lib/constants/meta";
+import Delimiter from "@layouts/Delimiter.astro";
+import SectionFilterBar from "src/components/page/properties/SectionFilterBar";
+import SectionHeaderImage from "src/components/sections/SectionHeaderImage";
 ---
 
 <Layout
-    title={meta.propiedades.title}
-    description={meta.propiedades.description}
-    keywords={meta.propiedades.keywords}
+  title={meta.propiedades.title}
+  description={meta.propiedades.description}
+  keywords={meta.propiedades.keywords}
 >
-    <main>
-        <p>Propiedades</p>
-    </main>
+  <main>
+    <SectionHeaderImage
+      img={{
+        src: "/assets/images/banner/propiedades.webp",
+        alt: "Propiedades",
+      }}
+      tagline="Propiedades"
+      title="Descubre tu próximo hogar"
+      client:only
+    />
+    <SectionFilterBar client:only />
+    <Delimiter className="flex flex-col lgx:flex-row gap-6 relative mt-10">
+      <SectionPropertyFilters
+        className="hidden lgx:block min-w-[350px] max-w-[350px] sticky top-[136px] h-max p-4 rounded-[20px] shadow-[0_0_14px_#00000022]"
+        client:only
+      />
+      <SectionProperties client:only />
+    </Delimiter>
+    <SectionMobilePropertyFilters client:only />
+  </main>
 </Layout>

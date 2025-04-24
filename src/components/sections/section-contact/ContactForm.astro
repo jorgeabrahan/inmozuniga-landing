@@ -13,7 +13,7 @@ import MainButton from "src/components/global/MainButton.astro";
     Nuestros agentes están listos para ayudarte en todo lo que necesites, agenda
     una cita y te ayudaremos a encontrar la mejor solución para tus necesidades.
   </p>
-  <div class="flex flex-col gap-6 mb-8">
+  <div class="flex flex-col gap-6 mb-4">
     <Input id="name" label="Nombre" placeholder="Jorge Sigüenza" required />
     <Input id="phone" type="tel" label="Teléfono" required />
     <Input
@@ -48,7 +48,7 @@ import MainButton from "src/components/global/MainButton.astro";
       placeholder="Quiero adquirir un terreno para construir mi hogar"
     />
   </div>
-  <MainButton text="Agendar ahora" type="submit" />
+  <MainButton className="ml-auto" text="Agendar ahora" type="submit" />
 </form>
 
 <script>

@@ -3,6 +3,7 @@ interface Props {
   id: string;
   type?: astroHTML.JSX.HTMLInputTypeAttribute;
   className?: string;
+  groupClassName?: string;
   placeholder?: string;
   label?: string;
   required?: boolean;
@@ -12,13 +13,14 @@ const {
   id,
   type = "text",
   className = "",
+  groupClassName = "",
   placeholder = "",
   label = "",
   required = false,
 } = Astro.props;
 ---
 
-<div class="relative w-full">
+<div class={`relative w-full ${groupClassName}`} data-group-id={id}>
   <label
     class="absolute top-0 left-4 z-10 -translate-y-[45%] bg-white text-black-800 px-2 text-sm"
     for={id}>{label}</label
