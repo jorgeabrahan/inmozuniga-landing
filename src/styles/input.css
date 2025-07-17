@@ -46,6 +46,9 @@ html:root {
 .swiper {
   user-select: none;
 }
+.swiper .swiper-wrapper {
+  overflow-y: hidden !important
+}
 .swiper-pagination {
   transition: transform 0.2s ease-in-out !important;
 }

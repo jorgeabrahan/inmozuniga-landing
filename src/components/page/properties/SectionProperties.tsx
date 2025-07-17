@@ -1,5 +1,4 @@
 import NavArrowDownIcon from "@icons/NavArrowDownIcon";
-import type { TypeCosmicProperty } from "@lib/types/Database";
 import { useEffect, useMemo, useState } from "react";
 import PropertyCard from "src/components/global/property-card/PropertyCard";
 import { ServiceProperties } from "src/services/ServiceProperties";

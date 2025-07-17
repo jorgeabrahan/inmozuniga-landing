@@ -14,7 +14,7 @@ export default function PropertyImagesSwiper({
   propertyName,
 }: PropertyImagesSwiperProps) {
   return (
-    <div className="group user-select-none transition-shadow duration-500 group-hover:shadow-xl rounded-xl overflow-hidden">
+    <div className="group user-select-none rounded-xl overflow-hidden">
       <Swiper
         cssMode={true}
         mousewheel={true}
@@ -29,7 +29,7 @@ export default function PropertyImagesSwiper({
         {propertyImages.map((image, index) => (
           <SwiperSlide key={index}>
             <img
-              className="h-[300px] rounded-xl w-full object-cover"
+              className="h-[300px] rounded-xl w-full object-cover transition-transform duration-500 group-hover:scale-110"
               src={image.url}
               alt={propertyName}
               loading="lazy"
