@@ -120,7 +120,6 @@ export default function SectionPropertyFilters({
 
     let shouldUpdateURL = false;
 
-    // STATUS
     const statusParam = params.get("status");
     const isValidStatus =
       statusParam === "all" ||
@@ -135,7 +134,6 @@ export default function SectionPropertyFilters({
       shouldUpdateURL = true;
     }
 
-    // CATEGORY
     const categoryParam = params.get("category");
     const isValidCategory =
       categoryParam === "all" ||
@@ -155,7 +153,6 @@ export default function SectionPropertyFilters({
         finalCategory as TypePropertyCategoryKey
       ] ?? {};
 
-    // TRAIT FILTERS
     const traitParams = [
       "bedrooms",
       "bathrooms",
@@ -179,7 +176,6 @@ export default function SectionPropertyFilters({
       }
     });
 
-    // AREA FILTERS
     const measurementType =
       PROPERTY_CATEGORY_MEASUREMENT_TYPE[
         finalCategory as TypePropertyCategoryKey
@@ -213,7 +209,6 @@ export default function SectionPropertyFilters({
       shouldUpdateURL = true;
     }
 
-    // PRICE FILTERS
     const totalRaw = params.get("total");
     const totalValue = Number(totalRaw);
     const isTotalValid =
@@ -244,7 +239,6 @@ export default function SectionPropertyFilters({
       shouldUpdateURL = true;
     }
 
-    // REMOVE UNEXPECTED PARAMS
     Array.from(params.keys()).forEach((key) => {
       if (!expectedParams.includes(key)) {
         params.delete(key);
@@ -252,7 +246,6 @@ export default function SectionPropertyFilters({
       }
     });
 
-    // UPDATE URL
     if (shouldUpdateURL) {
       window.history.replaceState(
         null,
@@ -389,7 +382,6 @@ export default function SectionPropertyFilters({
       url.searchParams.set("rods", "");
     }
 
-    // Precio
     if (status === PROPERTY_AVAILABILITY_KEYS.sale) {
       url.searchParams.set(
         "total",
@@ -407,7 +399,6 @@ export default function SectionPropertyFilters({
       url.searchParams.set("installment", "");
     }
 
-    // Reemplaza la URL sin recargar
     window.history.replaceState(null, "", url.toString());
     updatePropertyFilters();
   }

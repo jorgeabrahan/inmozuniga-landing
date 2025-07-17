@@ -3,6 +3,7 @@ import { Toaster } from "sonner";
 import SectionNavbar from "src/components/sections/SectionNavbar.astro";
 import SectionFooter from "src/components/sections/SectionFooter.astro";
 import "../styles/input.css";
+import "intl-tel-input/build/css/intlTelInput.css";
 
 interface Props {
   title: string;
@@ -69,7 +70,7 @@ const companyName = "Inmobiliaria Zúniga y Asoc.";
         </script> -->
 
     <!-- Intl Tel Input -->
-    <link
+    <!-- <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/intl-tel-input/build/css/intlTelInput.css"
     />
@@ -89,7 +90,7 @@ const companyName = "Inmobiliaria Zúniga y Asoc.";
           ) => IntlTelInputInstance;
         }
       }
-    </script>
+    </script> -->
   </head>
   <body>
     <SectionNavbar />

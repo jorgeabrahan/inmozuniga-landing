@@ -8,5 +8,4 @@ export const intlTelInputSettings: IntlTelInputSettings = {
     getUserCountryData().then(callback).catch(callback);
   },
   separateDialCode: true,
-  utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input/build/js/utils.js",
 };

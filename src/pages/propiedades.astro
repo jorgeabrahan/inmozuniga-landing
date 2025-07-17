@@ -22,16 +22,16 @@ import SectionHeaderImage from "src/components/sections/SectionHeaderImage";
       }}
       tagline="Propiedades"
       title="Descubre tu próximo hogar"
-      client:only
+      client:load
     />
-    <SectionFilterBar client:only />
+    <SectionFilterBar client:load />
     <Delimiter className="flex flex-col lgx:flex-row gap-6 relative mt-10">
       <SectionPropertyFilters
         className="hidden lgx:block min-w-[350px] max-w-[350px] sticky top-[136px] h-max p-4 rounded-[20px] shadow-[0_0_14px_#00000022]"
-        client:only
+        client:load
       />
-      <SectionProperties client:only />
+      <SectionProperties client:load />
     </Delimiter>
-    <SectionMobilePropertyFilters client:only />
+    <SectionMobilePropertyFilters client:load />
   </main>
 </Layout>

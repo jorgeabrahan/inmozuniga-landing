@@ -36,6 +36,28 @@ export class ServiceProperties {
       };
     }
   }
+  static async getAllProperties() {
+    try {
+      const response = await cosmic.objects
+        .find({
+          type: "properties",
+        })
+        .props("slug,title,metadata,type,thumbnail")
+        .depth(1);
+
+      return {
+        ok: true,
+        data: response.objects ?? [],
+        total: response.total ?? 0,
+      };
+    } catch (error) {
+      return {
+        ok: false,
+        data: [],
+        total: 0,
+      };
+    }
+  }
   static async getProperties({
     limit = 10,
     page = 1,

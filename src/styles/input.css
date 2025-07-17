@@ -74,7 +74,8 @@ textarea {
 
 .iti--inline-dropdown .iti__dropdown-content {
   width: 350px !important;
-  @apply z-[1000] mt-2 border border-black-800/50 shadow-none;
+  z-index: 1000 !important;
+  @apply mt-2 border border-black-800/50 shadow-none;
 }
 
 .iti__selected-country-primary:hover,

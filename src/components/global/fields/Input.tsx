@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import intlTelInput from "intl-tel-input";
+// import intlTelInput, { Iti } from "intl-tel-input";
+import { intlTelInputSettings } from "@lib/constants";
 
 interface InputProps {
   id: string;
@@ -8,6 +11,7 @@ interface InputProps {
   placeholder?: string;
   label?: string | React.ReactNode;
   required?: boolean;
+  refIntlInputInstance?: React.MutableRefObject<any | null>;
   icon?: ({ size }: { size: string | number }) => React.JSX.Element;
 }
 
@@ -20,10 +24,20 @@ export default function Input({
   label = "",
   required = false,
   icon,
+  refIntlInputInstance,
   ...props
 }: React.InputHTMLAttributes<HTMLInputElement> & InputProps) {
   const hasIcon = icon != null;
+  const refInput = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    if (type === "tel" && refInput.current && refIntlInputInstance) {
+      const instance = intlTelInput(refInput.current, intlTelInputSettings);
+      refIntlInputInstance.current = instance;
+    }
+  }, [type]);
+
   return (
     <div className={`relative w-full ${groupClassName}`} data-group-id={id}>
       <label
@@ -40,6 +54,7 @@ export default function Input({
         </span>
       )}
       <input
+        ref={refInput}
         id={id}
         name={id}
         type={type}

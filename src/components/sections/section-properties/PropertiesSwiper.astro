@@ -1,6 +1,6 @@
 ---
 import type { TypeCosmicProperty } from "@lib/types/Database";
-import PropertyCard from "src/components/global/property-card/PropertyCard.astro";
+import PropertyCard from "src/components/global/property-card/PropertyCard";
 
 interface Props {
   properties: TypeCosmicProperty[];
@@ -15,7 +15,7 @@ const { properties, className = "" } = Astro.props;
     {
       properties.map((property) => (
         <div class="swiper-slide max-w-[350px]">
-          <PropertyCard property={property} />
+          <PropertyCard client:load property={property} />
         </div>
       ))
     }
@@ -28,21 +28,5 @@ const { properties, className = "" } = Astro.props;
     cssMode: true,
     slidesPerView: "auto",
     spaceBetween: 15,
-  });
-</script>
-
-<script>
-  const propertiesSwiper = document.querySelectorAll(".properties-swiper");
-  propertiesSwiper?.forEach((swiper) => {
-    const properties = swiper?.querySelectorAll(
-      "[data-id='property']",
-    ) as NodeListOf<HTMLElement>;
-
-    properties?.forEach((property) => {
-      property.addEventListener("click", (e) => {
-        if ((e?.target as Element)?.closest(".swiper-pagination")) return;
-        window.location.href = `/propiedades/${property.id}`;
-      });
-    });
   });
 </script>

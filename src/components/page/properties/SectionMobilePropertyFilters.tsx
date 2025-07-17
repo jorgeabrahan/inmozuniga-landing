@@ -87,11 +87,11 @@ export default function SectionMobilePropertyFilters() {
         ref={refFiltersWrapper}
       >
         <button
-          className="flex items-center justify-center ml-auto mb-3 [&>*]:pointer-events-none"
+          className="flex items-center justify-center ml-auto mb-3 [&>*]:pointer-events-none bg-harvest-gold-700 text-white p-2 rounded-full"
           onClick={handleClose}
           data-close-onclick
         >
-          <CloseIcon />
+          <CloseIcon size="18" />
         </button>
         <SectionPropertyFilters afterSubmit={handleClose} />
       </div>
