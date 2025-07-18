@@ -134,7 +134,7 @@ export default function SectionProperties() {
       )}
 
       {totalPages > 1 && (
-        <div className="flex justify-end items-stretch w-full gap-2">
+        <div className="flex justify-center items-stretch w-full gap-2">
           <button
             onClick={() => goToPage(page - 1)}
             disabled={page === 1 || isLoading}
