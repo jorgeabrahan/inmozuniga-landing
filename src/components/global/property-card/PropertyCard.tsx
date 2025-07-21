@@ -15,11 +15,16 @@ export default function PropertyCard({
   property,
   className = "",
 }: PropertyCardProps) {
+  const goToDetail = (e: React.MouseEvent<HTMLElement>) => {
+    if ((e.target as HTMLElement).closest("a")) return;
+    window.location.href = `/propiedades/${property.slug}`;
+  };
   return (
     <article
       className={`cursor-pointer group ${className}`}
       data-id="property"
       id={property.slug}
+      onClick={goToDetail}
     >
       <div className="relative">
         <PropertyImagesSwiper
@@ -34,6 +39,7 @@ export default function PropertyCard({
           <a
             href={`tel:+${property.metadata.agent_phone_number}`}
             className="bg-black-950/80 text-white backdrop-blur-lg rounded-full p-2"
+            onClick={(e) => e.stopPropagation()}
           >
             <PhoneIcon strokeWidth="2" size="14px" />
           </a>
@@ -41,6 +47,7 @@ export default function PropertyCard({
             href={generatePropertyWaUrl(property)}
             target="_blank"
             className="bg-black-950/80 text-white backdrop-blur-lg rounded-full py-2 px-4 flex items-center gap-2 font-semibold"
+            onClick={(e) => e.stopPropagation()}
           >
             <MessageTextIcon strokeWidth="2" size="14px" />
             <span className="text-[10px]">Mensaje</span>

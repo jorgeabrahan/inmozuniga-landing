@@ -1,0 +1,24 @@
+---
+export const prerender = false;
+
+import Layout from "@layouts/Layout.astro";
+import { meta } from "@lib/constants";
+import { ServiceProperties } from "src/services/ServiceProperties";
+
+const { slug } = Astro.params;
+const { data } = await ServiceProperties.getProperty(slug || "");
+
+if (!data) {
+  throw Astro.redirect("/propiedades", 302);
+}
+---
+
+<Layout
+  title={meta.propiedad.title}
+  description={meta.propiedad.description}
+  keywords={meta.propiedad.keywords}
+>
+  <main>
+    <h1>Propiedad {slug}</h1>
+  </main>
+</Layout>
