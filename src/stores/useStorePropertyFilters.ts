@@ -4,6 +4,18 @@ import type {
 } from "@lib/types/Application";
 import { create } from "zustand";
 
+type TypeFilterKeys =
+  | "status"
+  | "category"
+  | "bedrooms"
+  | "bathrooms"
+  | "floors"
+  | "parkingLots"
+  | "meters"
+  | "rods"
+  | "total"
+  | "installment";
+
 interface Store {
   isShowingFilters: boolean;
   filters: {
@@ -19,7 +31,17 @@ interface Store {
     installment: string;
   };
   setIsShowingFilters: (isShowingFilters: boolean) => void;
-  setFilters: (filters: Store["filters"]) => void;
+  setAllFilters: (filters: Store["filters"]) => void;
+  setFilter: ({
+    key,
+    value,
+  }: {
+    key: TypeFilterKeys;
+    value: string | number;
+  }) => void;
+  setFilters: (
+    filters: { key: TypeFilterKeys; value: string | number }[],
+  ) => void;
 }
 
 export const useStorePropertyFilters = create<Store>((set) => ({
@@ -37,5 +59,9 @@ export const useStorePropertyFilters = create<Store>((set) => ({
     installment: "",
   },
   setIsShowingFilters: (isShowingFilters) => set({ isShowingFilters }),
-  setFilters: (filters) => set({ filters }),
+  setAllFilters: (filters) => set({ filters }),
+  setFilter: ({ key, value }) =>
+    set((state) => ({ filters: { ...state.filters, [key]: value } })),
+  setFilters: (filters) =>
+    set((state) => ({ filters: { ...state.filters, ...filters } })),
 }));

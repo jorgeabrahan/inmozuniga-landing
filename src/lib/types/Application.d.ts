@@ -7,11 +7,19 @@ import type {
 export type TypePropertyAvailabilityKey = keyof typeof PROPERTY_AVAILABILITY;
 export type TypePropertyAvailability =
   (typeof PROPERTY_AVAILABILITY)[TypePropertyAvailabilityKey];
+export type TypePropertyAvailabilities = TypePropertyAvailabilityKey | "all";
 
 export type TypePropertyCategoryKey = keyof typeof PROPERTY_CATEGORY;
 export type TypePropertyCategory =
   (typeof PROPERTY_CATEGORY)[TypePropertyCategoryKey];
+export type TypePropertyCategories = TypePropertyCategoryKey | "all";
 
 export type TypePropertyStatusKey = keyof typeof PROPERTY_STATUS;
 export type TypePropertyStatus =
   (typeof PROPERTY_STATUS)[TypePropertyStatusKey];
+
+export type TypeUrlParam = {
+  key: string;
+  value?: string;
+  operation: "set" | "delete";
+};

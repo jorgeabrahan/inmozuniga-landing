@@ -46,7 +46,7 @@ export default function Input({
       >
         <label
           htmlFor={id}
-          className="absolute top-0 left-4 z-10 -translate-y-[45%] bg-white text-black-800 px-2 text-sm"
+          className={`absolute top-0 left-4 z-10 -translate-y-[45%] bg-white px-2 text-sm ${error ? "text-red-600" : "text-black-800"}`}
         >
           {label}
         </label>
@@ -63,7 +63,7 @@ export default function Input({
           name={id}
           type={type}
           placeholder={placeholder}
-          className={`w-full rounded-xl py-5 border font-[inherit] transition-colors duration-300 ${error ? "border-red-800/50 focus:border-red-800" : "border-black-800/50 focus:border-black"} ${hasIcon ? "pl-12 pr-4" : "px-4"} ${className}`}
+          className={`w-full rounded-xl py-5 border font-[inherit] transition-colors duration-300 ${error ? "border-red-600" : "border-black-800/50 focus:border-black"} ${hasIcon ? "pl-12 pr-4" : "px-4"} ${className}`}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           spellCheck={false}

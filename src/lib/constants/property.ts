@@ -98,6 +98,8 @@ export const PROPERTY_CATEGORY = {
   land: "Terreno",
 } as const;
 
+export const DEFAULT_PROPERTY_CATEGORY = "all";
+
 export const PROPERTY_CATEGORY_KEYS = {
   house: "house",
   apartment: "apartment",
@@ -127,6 +129,8 @@ export const PROPERTY_AVAILABILITY = {
   sale: "Venta",
   rent: "Renta",
 } as const;
+
+export const DEFAULT_PROPERTY_AVAILABILITY = "all";
 
 export const PROPERTY_AVAILABILITY_KEYS = {
   sale: "sale",
