@@ -19,6 +19,7 @@ import type {
   TypePropertyCategoryKey,
   TypeUrlParam,
 } from "@lib/types/Application";
+import { manageUrlParams } from "@lib/utils/urlParams";
 import { useEffect, useMemo } from "react";
 import Input from "src/components/global/fields/Input";
 import InputCounter from "src/components/global/fields/InputCounter";
@@ -69,6 +70,9 @@ export default function SectionPropertyFilters({
   const setFilter = useStorePropertyFilters((store) => store.setFilter);
   const setFilters = useStorePropertyFilters((store) => store.setFilters);
   const setAllFilters = useStorePropertyFilters((store) => store.setAllFilters);
+  const query = useStorePropertyFilters((store) => store.query);
+  const setQuery = useStorePropertyFilters((store) => store.setQuery);
+
   const {
     form,
     status,
@@ -191,6 +195,14 @@ export default function SectionPropertyFilters({
         urlSearchParams.delete(key);
       }
     });
+
+    // load query to local store from the url search params
+    if (params?.search && params.search.trim().length > 0) {
+      setQuery(params.search);
+    } else {
+      urlSearchParams.delete("search");
+    }
+
     window.history.replaceState(
       null,
       "",
@@ -198,22 +210,6 @@ export default function SectionPropertyFilters({
     );
     setAllFilters(filters);
   }, []);
-
-  const setUrlParams = (params: TypeUrlParam[]) => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    params.map(({ key, value, operation }) => {
-      if (operation === "set" && value) {
-        urlSearchParams.set(key, value);
-      } else if (operation === "delete") {
-        urlSearchParams.delete(key);
-      }
-    });
-    window.history.replaceState(
-      null,
-      "",
-      `${window.location.pathname}?${urlSearchParams.toString()}`,
-    );
-  };
 
   const handleStatusChange = (status: TypePropertyAvailabilityKey | "all") => {
     const updatedUrlParams: TypeUrlParam[] = [
@@ -240,7 +236,7 @@ export default function SectionPropertyFilters({
       updatedUrlParams.push({ key: form.total.id, operation: "delete" });
       updatedFilters.push({ key: form.total.id, value: INITIAL_FILTERS.total });
     }
-    setUrlParams(updatedUrlParams);
+    manageUrlParams(updatedUrlParams);
     setFilters(updatedFilters);
   };
   const handleCategoryChange = (category: string) => {
@@ -283,7 +279,7 @@ export default function SectionPropertyFilters({
         value: INITIAL_FILTERS.meters,
       });
     }
-    setUrlParams(updatedUrlParams);
+    manageUrlParams(updatedUrlParams);
     setFilters(updatedFilters);
   };
   const handleMeasurementChange = (key: "meters" | "rods", value: string) => {
@@ -291,7 +287,7 @@ export default function SectionPropertyFilters({
     const label = PROPERTY_MEASUREMENT_TYPE[key];
     if (measurement >= 50) {
       setError(form[key].id, "");
-      setUrlParams([{ key, value, operation: "set" }]);
+      manageUrlParams([{ key, value, operation: "set" }]);
       setFilter({ key, value });
       return;
     }
@@ -307,7 +303,7 @@ export default function SectionPropertyFilters({
       : `El mínimo costo total permitido es $${minPrice}`;
     if (isValidPrice) {
       setError(form[key].id, "");
-      setUrlParams([{ key, value, operation: "set" }]);
+      manageUrlParams([{ key, value, operation: "set" }]);
       setFilter({ key, value });
       return;
     }
@@ -318,9 +314,9 @@ export default function SectionPropertyFilters({
     value: number,
   ) => {
     if (value > 0) {
-      setUrlParams([{ key, value: value.toString(), operation: "set" }]);
+      manageUrlParams([{ key, value: value.toString(), operation: "set" }]);
     } else {
-      setUrlParams([{ key, operation: "delete" }]);
+      manageUrlParams([{ key, operation: "delete" }]);
     }
     setFilter({ key, value });
   };

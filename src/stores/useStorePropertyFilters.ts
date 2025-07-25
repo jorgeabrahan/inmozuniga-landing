@@ -20,6 +20,7 @@ export type TypePropertyFilter = {
   value: string | number;
 };
 interface Store {
+  query: string;
   isShowingFilters: boolean;
   filters: {
     status: TypePropertyAvailabilityKey | "all";
@@ -43,9 +44,11 @@ interface Store {
     value: string | number;
   }) => void;
   setFilters: (filters: TypePropertyFilter[]) => void;
+  setQuery: (query: string) => void;
 }
 
 export const useStorePropertyFilters = create<Store>((set) => ({
+  query: "",
   isShowingFilters: false,
   filters: {
     status: "all",
@@ -76,4 +79,5 @@ export const useStorePropertyFilters = create<Store>((set) => ({
         },
       };
     }),
+  setQuery: (query) => set({ query }),
 }));

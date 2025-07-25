@@ -16,6 +16,7 @@ export default function SectionProperties() {
   const setIsFetched = useStoreProperties((store) => store.setIsFetched);
   const setIsLoading = useStoreProperties((store) => store.setIsLoading);
   const setAllProperties = useStoreProperties((store) => store.setProperties);
+  const query = useStorePropertyFilters((store) => store.query);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -84,9 +85,21 @@ export default function SectionProperties() {
       )
         return false;
 
+      if (query.trim().length > 0) {
+        const normalize = (str: string) =>
+          str
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase();
+
+        const normalizedQuery = normalize(query.trim());
+        const normalizedTitle = normalize(prop.title ?? "");
+        if (!normalizedTitle.includes(normalizedQuery)) return false;
+      }
+
       return true;
     });
-  }, [allProperties, filters]);
+  }, [allProperties, filters, query]);
 
   const totalPages = Math.ceil(filteredProperties.length / PROPERTIES_PER_PAGE);
 
