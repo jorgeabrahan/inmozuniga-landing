@@ -4,7 +4,7 @@ import type {
 } from "@lib/types/Application";
 import { create } from "zustand";
 
-type TypeFilterKeys =
+export type TypePropertyFilterKeys =
   | "status"
   | "category"
   | "bedrooms"
@@ -15,7 +15,10 @@ type TypeFilterKeys =
   | "rods"
   | "total"
   | "installment";
-
+export type TypePropertyFilter = {
+  key: TypePropertyFilterKeys;
+  value: string | number;
+};
 interface Store {
   isShowingFilters: boolean;
   filters: {
@@ -36,12 +39,10 @@ interface Store {
     key,
     value,
   }: {
-    key: TypeFilterKeys;
+    key: TypePropertyFilterKeys;
     value: string | number;
   }) => void;
-  setFilters: (
-    filters: { key: TypeFilterKeys; value: string | number }[],
-  ) => void;
+  setFilters: (filters: TypePropertyFilter[]) => void;
 }
 
 export const useStorePropertyFilters = create<Store>((set) => ({
