@@ -64,5 +64,16 @@ export const useStorePropertyFilters = create<Store>((set) => ({
   setFilter: ({ key, value }) =>
     set((state) => ({ filters: { ...state.filters, [key]: value } })),
   setFilters: (filters) =>
-    set((state) => ({ filters: { ...state.filters, ...filters } })),
+    set((state) => {
+      const newFilters: Partial<Store["filters"]> = {};
+      filters.forEach(({ key, value }) => {
+        newFilters[key] = value as any;
+      });
+      return {
+        filters: {
+          ...state.filters,
+          ...newFilters,
+        },
+      };
+    }),
 }));

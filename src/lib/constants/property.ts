@@ -32,10 +32,10 @@ export const PROPERTY_RENT_CATEGORIES = [
 
 export const PROPERTY_TRAIT_FILTERS_BY_CATEGORY = {
   all: {
-    bedrooms: true,
-    bathrooms: true,
-    floors: true,
-    parkingLots: true,
+    bedrooms: false,
+    bathrooms: false,
+    floors: false,
+    parkingLots: false,
   },
   house: {
     bedrooms: true,

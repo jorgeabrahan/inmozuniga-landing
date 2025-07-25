@@ -85,7 +85,6 @@ export default function SectionPropertyFilters({
     setValue,
     setError,
   } = useForm<Form>(INITIAL_FILTERS);
-
   const validateCategoryBasedOnStatus = (
     status: TypePropertyAvailabilityKey | "all",
     categoryKey: string,
@@ -216,100 +215,6 @@ export default function SectionPropertyFilters({
     );
   };
 
-  // useEffect(() => {
-  //   console.log("a?");
-  //   const validate = () => {
-  //     form.clearErrors();
-  //     const m = Number(meters);
-  //     let isValid = true;
-  //     if (meters.trim() && m < 50) {
-  //       setError(form.meters.id, "El mínimo de metros es 50");
-  //       isValid = false;
-  //     }
-  //     const r = Number(rods);
-  //     if (rods.trim() && r < 50) {
-  //       setError(form.rods.id, "El mínimo de vallas es 50");
-  //       isValid = false;
-  //     }
-  //     const t = Number(total);
-  //     if (total.trim() && t < 100000) {
-  //       setError(
-  //         form.total.id,
-  //         "El mínimo costo total permitido es $100,000.00",
-  //       );
-  //       isValid = false;
-  //     }
-  //     const i = Number(installment);
-  //     if (installment.trim() && i < 100) {
-  //       setError(form.installment.id, "La mínima cuota permitida es $100.00");
-  //       isValid = false;
-  //     }
-  //     return isValid;
-  //   };
-
-  //   if (!validate()) return;
-
-  //   setFilters({
-  //     status,
-  //     category,
-  //     bedrooms,
-  //     bathrooms,
-  //     floors,
-  //     parkingLots,
-  //     meters,
-  //     rods,
-  //     total,
-  //     installment,
-  //   });
-
-  //   const url = new URL(window.location.href);
-  //   const params = url.searchParams;
-
-  //   const setIf = (
-  //     key: string,
-  //     val: string | number,
-  //     skip: boolean | string | number,
-  //   ) => (skip ? params.delete(key) : params.set(key, String(val)));
-
-  //   setIf(form.status.id, status, status === "all");
-  //   setIf(form.category.id, category, category === "all");
-  //   setIf(form.bedrooms.id, bedrooms, bedrooms === 0);
-  //   setIf(form.bathrooms.id, bathrooms, bathrooms === 0);
-  //   setIf(form.floors.id, floors, floors === 0);
-  //   setIf(form.parkingLots.id, parkingLots, parkingLots === 0);
-
-  //   const measurementType =
-  //     PROPERTY_CATEGORY_MEASUREMENT_TYPE[category as TypePropertyCategoryKey];
-  //   setIf(
-  //     form.meters.id,
-  //     meters,
-  //     measurementType !== "meters" || meters === "",
-  //   );
-  //   setIf(form.rods.id, rods, measurementType !== "rods" || rods === "");
-  //   setIf(form.total.id, total, status !== "sale" || total === "");
-  //   setIf(
-  //     form.installment.id,
-  //     installment,
-  //     status !== "rent" || installment === "",
-  //   );
-
-  //   window.history.replaceState(
-  //     null,
-  //     "",
-  //     `${url.pathname}?${params.toString()}`,
-  //   );
-  // }, [
-  //   status,
-  //   category,
-  //   bedrooms,
-  //   bathrooms,
-  //   floors,
-  //   parkingLots,
-  //   meters,
-  //   rods,
-  //   total,
-  //   installment,
-  // ]);
   const handleStatusChange = (status: TypePropertyAvailabilityKey | "all") => {
     const updatedUrlParams: TypeUrlParam[] = [
       { key: form.status.id, value: status, operation: "set" },
@@ -317,7 +222,7 @@ export default function SectionPropertyFilters({
     const updatedFilters: TypePropertyFilter[] = [
       { key: form.status.id, value: status },
     ];
-    if (status === "all") {
+    if (status === DEFAULT_PROPERTY_AVAILABILITY) {
       updatedUrlParams.push({ key: form.installment.id, operation: "delete" });
       updatedUrlParams.push({ key: form.total.id, operation: "delete" });
       updatedFilters.push({
@@ -325,13 +230,13 @@ export default function SectionPropertyFilters({
         value: INITIAL_FILTERS.installment,
       });
       updatedFilters.push({ key: form.total.id, value: INITIAL_FILTERS.total });
-    } else if (status === "sale") {
+    } else if (status === PROPERTY_AVAILABILITY_KEYS.sale) {
       updatedUrlParams.push({ key: form.installment.id, operation: "delete" });
       updatedFilters.push({
         key: form.installment.id,
         value: INITIAL_FILTERS.installment,
       });
-    } else if (status === "rent") {
+    } else if (status === PROPERTY_AVAILABILITY_KEYS.rent) {
       updatedUrlParams.push({ key: form.total.id, operation: "delete" });
       updatedFilters.push({ key: form.total.id, value: INITIAL_FILTERS.total });
     }
@@ -339,13 +244,47 @@ export default function SectionPropertyFilters({
     setFilters(updatedFilters);
   };
   const handleCategoryChange = (category: string) => {
-    // TODO: remove url filters based on category
-    // la categoria determina que traits se muestran en los filtros (habitaciones, baños, pisos, parqueos)
-    // la categoria determina el tipo de medida (metros o varas)
-    setUrlParams([
+    const updatedUrlParams: TypeUrlParam[] = [
       { key: form.category.id, value: category, operation: "set" },
-    ]);
-    setFilter({ key: form.category.id, value: category });
+    ];
+    const updatedFilters: TypePropertyFilter[] = [
+      { key: form.category.id, value: category },
+    ];
+    const traitFiltersByCategory =
+      PROPERTY_TRAIT_FILTERS_BY_CATEGORY[category as TypePropertyCategoryKey];
+    Object.entries(traitFiltersByCategory).map(([key, value]) => {
+      if (!value) {
+        updatedUrlParams.push({ key, operation: "delete" });
+        updatedFilters.push({
+          key: key as keyof typeof INITIAL_FILTERS,
+          value: INITIAL_FILTERS[key as keyof typeof INITIAL_FILTERS],
+        });
+      }
+    });
+    const measurementType =
+      PROPERTY_CATEGORY_MEASUREMENT_TYPE[category as TypePropertyCategoryKey];
+    if (category === DEFAULT_PROPERTY_CATEGORY) {
+      updatedUrlParams.push({ key: form.meters.id, operation: "delete" });
+      updatedUrlParams.push({ key: form.rods.id, operation: "delete" });
+      updatedFilters.push({
+        key: form.meters.id,
+        value: INITIAL_FILTERS.meters,
+      });
+      updatedFilters.push({ key: form.rods.id, value: INITIAL_FILTERS.rods });
+    }
+    if (measurementType === "meters") {
+      updatedUrlParams.push({ key: form.rods.id, operation: "delete" });
+      updatedFilters.push({ key: form.rods.id, value: INITIAL_FILTERS.rods });
+    }
+    if (measurementType === "rods") {
+      updatedUrlParams.push({ key: form.meters.id, operation: "delete" });
+      updatedFilters.push({
+        key: form.meters.id,
+        value: INITIAL_FILTERS.meters,
+      });
+    }
+    setUrlParams(updatedUrlParams);
+    setFilters(updatedFilters);
   };
   const handleMeasurementChange = (key: "meters" | "rods", value: string) => {
     const measurement = Number(value);

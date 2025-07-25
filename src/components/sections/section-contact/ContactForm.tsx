@@ -4,7 +4,6 @@ import Select from "src/components/global/fields/Select";
 import Textarea from "src/components/global/fields/Textarea";
 import MainButton from "src/components/global/MainButton";
 import { UtilsFormat } from "@lib/utils/UtilsFormat";
-// import type { Iti } from "intl-tel-input";
 import { toast } from "sonner";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 
@@ -45,7 +44,6 @@ export default function ContactForm() {
       email: data.email.trim().toLowerCase(),
       phone: phoneNumber.number,
     };
-    console.log(formattedData);
   };
 
   return (
