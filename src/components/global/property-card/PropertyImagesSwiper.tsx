@@ -1,8 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Mousewheel, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/mousewheel";
+import { useState } from "react";
 
 interface PropertyImagesSwiperProps {
   propertyImages: { url: string }[];
@@ -13,6 +11,8 @@ export default function PropertyImagesSwiper({
   propertyImages,
   propertyName,
 }: PropertyImagesSwiperProps) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <div className="group user-select-none rounded-xl overflow-hidden">
       <Swiper
@@ -24,17 +24,19 @@ export default function PropertyImagesSwiper({
           clickable: true,
         }}
         modules={[Mousewheel, Pagination]}
+        onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
         className="property-images-swiper"
       >
         {propertyImages.map((image, index) => (
           <SwiperSlide key={index}>
             <img
-              className="h-[300px] rounded-xl w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className={`h-[300px] rounded-xl w-full object-cover transition-transform duration-500 ${
+                index === activeIndex ? "group-hover:scale-110" : ""
+              }`}
               src={image.url}
               alt={propertyName}
               loading="lazy"
             />
-            <div className="swiper-lazy-preloader swiper-lazy-preloader-white" />
           </SwiperSlide>
         ))}
       </Swiper>

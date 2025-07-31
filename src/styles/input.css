@@ -55,6 +55,10 @@ html:root {
 .swiper-pagination:hover {
   transform: scale(1.1);
 }
+.property-swiper-slide {
+  width: 80% !important;
+  background: #444;
+}
 
 input,
 select,
