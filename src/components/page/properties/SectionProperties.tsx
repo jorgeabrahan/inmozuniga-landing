@@ -128,6 +128,18 @@ export default function SectionProperties() {
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   };
 
+  const informativeMessage = useMemo(
+    () => ({
+      title: isLoading
+        ? "Cargando propiedades"
+        : "No se encontraron propiedades",
+      description: isLoading
+        ? "Espera mientras cargamos las propiedades disponibles"
+        : "No se encontraron resultados para los filtros aplicados, cámbialos e intenta de nuevo.",
+    }),
+    [isLoading],
+  );
+
   return (
     <section className="flex flex-col items-center gap-6 w-full">
       <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] w-full gap-4">
@@ -136,13 +148,10 @@ export default function SectionProperties() {
         ))}
       </div>
 
-      {!isLoading && visibleProperties.length === 0 && (
+      {visibleProperties.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-4 text-center">
-          <h2 className="text-2xl font-bold">No se encontraron propiedades</h2>
-          <p className="text-sm">
-            No se encontraron resultados para los filtros aplicados, cámbialos e
-            intenta de nuevo.
-          </p>
+          <h2 className="text-2xl font-bold">{informativeMessage.title}</h2>
+          <p className="text-sm">{informativeMessage.description}</p>
         </div>
       )}
 

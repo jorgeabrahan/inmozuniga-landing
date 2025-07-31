@@ -1,6 +1,5 @@
 import type { TypeCosmicProperty } from "@lib/types/Database";
 import PropertyCard from "src/components/global/property-card/PropertyCard";
-import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { SwiperOptions } from "swiper/types";
 

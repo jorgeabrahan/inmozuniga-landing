@@ -19,7 +19,7 @@ if (!data) {
   description={meta.propiedad.description}
   keywords={meta.propiedad.keywords}
 >
-  <PropertySwiper />
-  <!-- <main>
-  </main> -->
+  <main>
+    <PropertySwiper property={data} client:load />
+  </main>
 </Layout>

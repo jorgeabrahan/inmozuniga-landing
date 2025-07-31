@@ -12,27 +12,26 @@ import { cosmic } from "src/config/cosmic";
 export class ServiceProperties {
   static async getProperty(
     slug: string,
-  ): Promise<{ ok: boolean; data: TypeCosmicProperty | null; total: number }> {
+  ): Promise<{ ok: boolean; data: TypeCosmicProperty | null }> {
     try {
-      const queryParams: any = {
-        type: "properties",
-        slug: slug,
-      };
       const response = await cosmic.objects
-        .findOne(queryParams)
+        .findOne({
+          type: "properties",
+          slug: slug,
+        })
         .props("slug,title,metadata,type,thumbnail")
         .depth(1);
-
+      if (!response.object) {
+        throw new Error("Property not found");
+      }
       return {
         ok: true,
-        data: response.objects ?? [],
-        total: response.total ?? 0,
+        data: response.object,
       };
-    } catch (error) {
+    } catch {
       return {
         ok: false,
         data: null,
-        total: 0,
       };
     }
   }
