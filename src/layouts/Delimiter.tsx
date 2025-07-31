@@ -14,7 +14,7 @@ export default function Delimiter({
   return (
     <Tag
       id={id}
-      className={`px-3 lg:px-6 xl:px-8 w-full max-w-[1500px] mx-auto ${className}`}
+      className={`px-3 lg:px-6 xl:px-8 w-full max-w-[1300px] mx-auto ${className}`}
       {...props}
     >
       {children}
