@@ -5,7 +5,7 @@ import { ServiceProperties } from "src/services/ServiceProperties";
 import { useStoreProperties } from "src/stores/useStoreProperties";
 import { useStorePropertyFilters } from "src/stores/useStorePropertyFilters";
 
-const PROPERTIES_PER_PAGE = 15;
+const PROPERTIES_PER_PAGE = 16;
 const MAX_VISIBLE_PAGES = 4;
 
 export default function SectionProperties() {

@@ -26,7 +26,10 @@ import "../styles/properties-swiper.css";
       client:load
     />
     <SectionFilterBar client:load />
-    <Delimiter className="flex flex-col lgx:flex-row gap-6 relative mt-10">
+    <Delimiter
+      className="flex flex-col lgx:flex-row gap-6 relative mt-10"
+      id="properties-section"
+    >
       <SectionPropertyFilters
         className="hidden lgx:block min-w-[350px] max-w-[350px] sticky top-[136px] h-max p-4 rounded-[20px] shadow-[0_0_14px_#00000022]"
         client:load
