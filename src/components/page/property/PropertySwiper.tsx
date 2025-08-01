@@ -1,8 +1,15 @@
+import { DotsGridIcon } from "@icons/DotsGridIcon";
 import Delimiter from "@layouts/Delimiter";
 import type { TypeCosmicProperty } from "@lib/types/Database";
 import { useEffect, useMemo, useState } from "react";
+import { SectionFullScreenSwiper } from "src/components/sections/SectionFullScreenSwiper";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+const INITIAL_GALLERY_OPTIONS = {
+  isShowing: false,
+  imageToDisplay: "",
+};
 
 export const PropertySwiper = ({
   property,
@@ -10,6 +17,10 @@ export const PropertySwiper = ({
   property: TypeCosmicProperty;
 }) => {
   const [isDesktopSize, setIsDesktopSize] = useState(false);
+  const [galleryOptions, setGalleryOptions] = useState<{
+    isShowing: boolean;
+    imageToDisplay: string | null;
+  }>(INITIAL_GALLERY_OPTIONS);
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -41,6 +52,18 @@ export const PropertySwiper = ({
     return tempImages;
   }, [property]);
 
+  const openGallery = (image?: string) => {
+    window.document.body.style.overflow = "hidden";
+    setGalleryOptions({
+      isShowing: true,
+      imageToDisplay: image ?? null,
+    });
+  };
+  const closeGallery = () => {
+    window.document.body.style.overflow = "";
+    setGalleryOptions(INITIAL_GALLERY_OPTIONS);
+  };
+
   let header = (
     <Swiper
       cssMode={true}
@@ -55,7 +78,13 @@ export const PropertySwiper = ({
       {images
         .filter((i) => isNaN(Number(i)))
         .map((url) => (
-          <SwiperSlide className="property-swiper-slide" key={url}>
+          <SwiperSlide
+            className="property-swiper-slide"
+            key={url}
+            onClick={() => {
+              openGallery(url);
+            }}
+          >
             <img src={url} />
           </SwiperSlide>
         ))}
@@ -63,10 +92,13 @@ export const PropertySwiper = ({
   );
   if (isDesktopSize) {
     header = (
-      <Delimiter className="property-images">
+      <Delimiter className="property-images relative">
         {images.map((url) => (
           <div
-            className="relative after:content-[''] after:absolute after:inset-0 after:bg-gray-600/0 hover:after:bg-black/15 after:z-10 after:transition-colors after:duration-300 cursor-pointer"
+            className={`relative cursor-pointer ${isNaN(Number(url)) && "after:content-[''] after:absolute after:inset-0 after:bg-gray-600/0 hover:after:bg-black/15 after:z-10 after:transition-colors after:duration-300"}`}
+            onClick={() => {
+              if (isNaN(Number(url))) openGallery(url);
+            }}
             key={url}
           >
             {isNaN(Number(url)) ? (
@@ -76,8 +108,29 @@ export const PropertySwiper = ({
             )}
           </div>
         ))}
+        <button
+          className="flex items-center gap-2 absolute right-6 bottom-6 mr-8 z-20 bg-white hover:bg-gray-100 transition-colors duration-300 border border-solid border-black px-3 py-[6px] rounded-lg [&_*]:pointer-events-none"
+          onClick={() => openGallery()}
+        >
+          <DotsGridIcon size="20" />
+          <span>Abrir galería</span>
+        </button>
       </Delimiter>
     );
   }
-  return <>{header}</>;
+  return (
+    <>
+      {header}
+      {galleryOptions.isShowing && (
+        <SectionFullScreenSwiper
+          initialImageDisplaying={galleryOptions.imageToDisplay}
+          images={[
+            property.thumbnail,
+            ...property.metadata.images.map((obj) => obj.image.url),
+          ]}
+          onClose={closeGallery}
+        />
+      )}
+    </>
+  );
 };

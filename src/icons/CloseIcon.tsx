@@ -2,10 +2,12 @@ export default function CloseIcon({
   id,
   className,
   size = "24",
+  strokeWidth = "1.5",
 }: {
   id?: string;
   className?: string;
   size?: string;
+  strokeWidth?: string;
 }) {
   return (
     <svg
@@ -14,7 +16,7 @@ export default function CloseIcon({
       width={size}
       height={size}
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
+      strokeWidth={strokeWidth}
       stroke="currentColor"
       fill="none"
       strokeLinecap="round"
