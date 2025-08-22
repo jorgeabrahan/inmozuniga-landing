@@ -18,7 +18,7 @@ export default function PropertyTrait({
   return (
     <div className="flex items-center gap-1" title={title}>
       {children}
-      <span className="font-light">
+      <span className="font-light leading-[1]">
         {`${trait} `}
         {unitMeasurement}
       </span>

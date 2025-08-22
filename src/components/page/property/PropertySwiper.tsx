@@ -39,7 +39,7 @@ export const PropertySwiper = ({
       property.thumbnail,
       ...property.metadata.images.map((obj) => obj.image.url),
     ];
-    if (tempImages.length > 5) {
+    if (tempImages.length > 5 && isDesktopSize) {
       tempImages.splice(5);
     }
     if (tempImages.length < 5) {
@@ -50,7 +50,7 @@ export const PropertySwiper = ({
       tempImages.push(...placeholderItems);
     }
     return tempImages;
-  }, [property]);
+  }, [property, isDesktopSize]);
 
   const openGallery = (image?: string) => {
     window.document.body.style.overflow = "hidden";

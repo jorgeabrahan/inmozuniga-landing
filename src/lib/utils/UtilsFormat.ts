@@ -21,4 +21,40 @@ export class UtilsFormat {
       currency: options.currency,
     }).format(amount);
   }
+  static asPlainText(html: string): string {
+    let text = html.replace(/<[^>]+>/g, "");
+
+    const entities: Record<string, string> = {
+      "&nbsp;": " ",
+      "&amp;": "&",
+      "&quot;": '"',
+      "&#39;": "'",
+      "&lt;": "<",
+      "&gt;": ">",
+      "&ordf;": "ª",
+      "&ordm;": "º",
+      "&eacute;": "é",
+      "&Eacute;": "É",
+      "&aacute;": "á",
+      "&Aacute;": "Á",
+      "&iacute;": "í",
+      "&Iacute;": "Í",
+      "&oacute;": "ó",
+      "&Oacute;": "Ó",
+      "&uacute;": "ú",
+      "&Uacute;": "Ú",
+      "&ntilde;": "ñ",
+      "&Ntilde;": "Ñ",
+      "&cent;": "¢",
+      "&euro;": "€",
+      "&dollar;": "$",
+      "&sup2;": "²",
+    };
+
+    for (const [entity, char] of Object.entries(entities)) {
+      text = text.replaceAll(entity, char);
+    }
+
+    return text;
+  }
 }

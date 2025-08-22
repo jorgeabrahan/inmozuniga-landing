@@ -6,6 +6,7 @@ import PropertyTraits from "./PropertyTraits";
 import PhoneIcon from "@icons/PhoneIcon";
 import MessageTextIcon from "@icons/MessageTextIcon";
 import { generatePropertyWaUrl } from "@lib/utils/generateUrl";
+import { UtilsFormat } from "@lib/utils/UtilsFormat";
 
 interface PropertyCardProps {
   property: TypeCosmicProperty;
@@ -34,7 +35,7 @@ export default function PropertyCard({
           ]}
           propertyName={property.title}
         />
-        <PropertyState propertyState={property.metadata.availability.value} />
+        <PropertyState property={property} />
         <div className="absolute top-3 left-4 z-10 flex items-stretch gap-2">
           <a
             href={`tel:+${property.metadata.agent_phone_number}`}
@@ -55,12 +56,19 @@ export default function PropertyCard({
         </div>
       </div>
       <div className="py-2">
-        <div className="flex items-center gap-1 justify-between mb-1">
+        <div className="flex items-center gap-1 justify-between mb-[2px]">
           <h2 className="text-xl font-bold line-clamp-1">{property.title}</h2>
-          <span className="capitalize text-sm">
+          {/* <span className="capitalize text-sm border border-black px-2 py-1">
             {property.metadata.category.value}
-          </span>
+          </span> */}
+          {/* <span className="capitalize text-sm">
+            {property.metadata.category.value}
+          </span> */}
         </div>
+        <p className="line-clamp-2 text-sm mb-1 text-black-800 font-light">
+          {UtilsFormat.asPlainText(property.metadata.description)}
+        </p>
+
         <PropertyPrice
           propertyState={property.metadata.availability.value}
           propertyPrice={{
