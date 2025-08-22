@@ -7,6 +7,7 @@ import PhoneIcon from "@icons/PhoneIcon";
 import MessageTextIcon from "@icons/MessageTextIcon";
 import { generatePropertyWaUrl } from "@lib/utils/generateUrl";
 import { UtilsFormat } from "@lib/utils/UtilsFormat";
+import { WhatsappIcon } from "@icons/WhatsappIcon";
 
 interface PropertyCardProps {
   property: TypeCosmicProperty;
@@ -36,46 +37,33 @@ export default function PropertyCard({
           propertyName={property.title}
         />
         <PropertyState property={property} />
-        <div className="absolute top-3 left-4 z-10 flex items-stretch gap-2">
-          <a
-            href={`tel:+${property.metadata.agent_phone_number}`}
-            className="bg-black-950/80 text-white backdrop-blur-lg rounded-full p-2"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <PhoneIcon strokeWidth="2" size="14px" />
-          </a>
-          <a
-            href={generatePropertyWaUrl(property)}
-            target="_blank"
-            className="bg-black-950/80 text-white backdrop-blur-lg rounded-full py-2 px-4 flex items-center gap-2 font-semibold"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <MessageTextIcon strokeWidth="2" size="14px" />
-            <span className="text-[10px]">Mensaje</span>
-          </a>
-        </div>
       </div>
       <div className="py-2">
-        <div className="flex items-center gap-1 justify-between mb-[2px]">
-          <h2 className="text-xl font-bold line-clamp-1">{property.title}</h2>
-          {/* <span className="capitalize text-sm border border-black px-2 py-1">
-            {property.metadata.category.value}
-          </span> */}
-          {/* <span className="capitalize text-sm">
-            {property.metadata.category.value}
-          </span> */}
-        </div>
-        <p className="line-clamp-2 text-sm mb-1 text-black-800 font-light">
+        <h2 className="text-xl font-bold line-clamp-1">{property.title}</h2>
+        <p className="line-clamp-1 text-sm mb-1 text-black-800 font-light">
           {UtilsFormat.asPlainText(property.metadata.description)}
         </p>
 
-        <PropertyPrice
-          propertyState={property.metadata.availability.value}
-          propertyPrice={{
-            fee: property.metadata.prices.installment,
-            total: property.metadata.prices.total,
-          }}
-        />
+        <div className="flex items-center justify-between mb-1">
+          <PropertyPrice
+            propertyState={property.metadata.availability.value}
+            propertyPrice={{
+              fee: property.metadata.prices.installment,
+              total: property.metadata.prices.total,
+            }}
+          />
+          <a
+            href={generatePropertyWaUrl(property)}
+            target="_blank"
+            className="bg-black backdrop-blur-md text-white rounded-full py-2 px-[14px] flex items-center gap-[6px] md:opacity-0 md:pointer-events-none md:group-hover:opacity-100 md:group-hover:pointer-events-auto transition-opacity duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <WhatsappIcon size="16px" />
+            <span className="text-[10px] font-light leading-[normal]">
+              Contáctanos
+            </span>
+          </a>
+        </div>
         <PropertyTraits property={property} />
       </div>
     </article>
