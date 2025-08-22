@@ -4,7 +4,7 @@ export const prerender = false;
 import Delimiter from "@layouts/Delimiter.astro";
 import Layout from "@layouts/Layout.astro";
 import { meta } from "@lib/constants";
-import { UtilsFormat } from "@lib/utils/UtilsFormat";
+import PropertyTraits from "src/components/page/property/PropertyTraits";
 import { PropertySwiper } from "src/components/page/property/PropertySwiper";
 import { ServiceProperties } from "src/services/ServiceProperties";
 
@@ -15,37 +15,44 @@ if (!data) {
   throw Astro.redirect("/propiedades", 302);
 }
 
-const MAX_CHARS = 350;
+const MAX_CHARS = 240;
 const fullDescription = data.metadata.description || "";
-const plainTextDescription = UtilsFormat.asPlainText(fullDescription);
-const truncated = plainTextDescription.length > MAX_CHARS;
+const truncated = fullDescription.length > MAX_CHARS;
 const shortDescription = truncated
-  ? plainTextDescription.substring(0, MAX_CHARS) + "..."
-  : plainTextDescription;
+  ? fullDescription.substring(0, MAX_CHARS) + "..."
+  : fullDescription;
 ---
 
 <Layout
   title={meta.propiedad.title}
   description={meta.propiedad.description}
   keywords={meta.propiedad.keywords}
-  >2
+>
   <PropertySwiper property={data} client:load />
-  <Delimiter className="flex flex-col lgx:flex-row gap-6 relative mt-10">
-    <h1 class="font-emphasis text-3xl font-bold">{data.title}</h1>
-    <div
-      class="description"
-      set:html={truncated ? shortDescription : fullDescription}
-    />
-    {
-      truncated && (
-        <button
-          class="mt-4 text-blue-600 font-medium hover:underline"
-          id="showMoreBtn"
-        >
-          Mostrar más
-        </button>
-      )
-    }
-    <div set:html={data.metadata.location} />
+  <Delimiter className="grid lg:grid-cols-7 relative mt-10">
+    <div class="lg:col-span-4">
+      <h1 class="text-3xl font-semibold mb-4">{data.title}</h1>
+      <div
+        class="description"
+        set:html={truncated ? shortDescription : fullDescription}
+      />
+      {
+        truncated && (
+          <button
+            class="bg-black-100/70 font-semibold px-5 py-3 rounded-lg"
+            id="showMoreBtn"
+          >
+            Mostrar más
+          </button>
+        )
+      }
+      <hr class="my-8" />
+      <PropertyTraits property={data} />
+      <hr class="my-8" />
+      <div
+        class="rounded-xl overflow-hidden shadow-md"
+        set:html={data.metadata.location}
+      />
+    </div>
   </Delimiter>
 </Layout>
