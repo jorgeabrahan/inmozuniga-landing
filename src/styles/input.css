@@ -78,10 +78,22 @@ html:root {
   }
 }
 .property-images {
+  --gap: 10px;
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
+  gap: var(--gap);
+}
+
+.property-images > div:not(:first-child) img {
+  height: 300px;
+  object-fit: cover;
+  width: 100%;
+}
+.property-images > div:first-child img {
+  height: calc(600px + var(--gap));
+  object-fit: cover;
+  width: 100%;
 }
 
 .property-images div:nth-child(1) {
@@ -183,7 +195,6 @@ iframe {
 .description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #1f2937;
 }
 
 .description p {

@@ -3,7 +3,10 @@ import Delimiter from "@layouts/Delimiter.astro";
 import SectionTitleHeader from "src/components/global/SectionTitleHeader.astro";
 import ArrowLink from "src/components/global/ArrowLink.astro";
 import { ServiceProperties } from "src/services/ServiceProperties";
-import { PROPERTY_AVAILABILITY_KEYS } from "@lib/constants/property";
+import {
+  PROPERTY_AVAILABILITY_KEYS,
+  PROPERTY_CATEGORY_KEYS,
+} from "@lib/constants/property";
 import PropertiesSwiper from "./section-properties/PropertiesSwiper";
 
 interface Props {
@@ -14,6 +17,7 @@ const { className = "" } = Astro.props;
 
 const { data: propertiesForSale } = await ServiceProperties.getProperties({
   availability: PROPERTY_AVAILABILITY_KEYS.sale,
+  category: PROPERTY_CATEGORY_KEYS.house,
 });
 const { data: propertiesForRent } = await ServiceProperties.getProperties({
   availability: PROPERTY_AVAILABILITY_KEYS.rent,
@@ -26,8 +30,16 @@ const { data: propertiesForRent } = await ServiceProperties.getProperties({
   >
     Nuestras <span class="text-harvest-gold-700">propiedades</span>
   </SectionTitleHeader>
-  <PropertiesSwiper client:load className="mb-8" properties={propertiesForSale} />
-  <PropertiesSwiper client:load className="mb-8" properties={propertiesForRent} />
+  <PropertiesSwiper
+    client:load
+    className="mb-8"
+    properties={propertiesForSale}
+  />
+  <PropertiesSwiper
+    client:load
+    className="mb-8"
+    properties={propertiesForRent}
+  />
   <ArrowLink
     className="mx-auto"
     url="/propiedades"

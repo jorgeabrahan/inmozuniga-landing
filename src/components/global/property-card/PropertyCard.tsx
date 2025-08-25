@@ -3,8 +3,6 @@ import PropertyImagesSwiper from "./PropertyImagesSwiper";
 import PropertyState from "./PropertyState";
 import PropertyPrice from "./PropertyPrice";
 import PropertyTraits from "./PropertyTraits";
-import PhoneIcon from "@icons/PhoneIcon";
-import MessageTextIcon from "@icons/MessageTextIcon";
 import { generatePropertyWaUrl } from "@lib/utils/generateUrl";
 import { UtilsFormat } from "@lib/utils/UtilsFormat";
 import { WhatsappIcon } from "@icons/WhatsappIcon";
@@ -43,7 +41,6 @@ export default function PropertyCard({
         <p className="line-clamp-1 text-sm mb-1 text-black-800 font-light">
           {UtilsFormat.asPlainText(property.metadata.description)}
         </p>
-
         <div className="flex items-center justify-between mb-1">
           <PropertyPrice
             propertyState={property.metadata.availability.value}
