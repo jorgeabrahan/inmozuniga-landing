@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface TextAreaProps {
   id: string;
@@ -18,8 +18,6 @@ export default function Textarea({
   required = false,
   ...props
 }: React.TextareaHTMLAttributes<HTMLTextAreaElement> & TextAreaProps) {
-  const [isFocused, setIsFocused] = useState(false);
-
   return (
     <div className="relative w-full">
       <label
@@ -37,8 +35,6 @@ export default function Textarea({
         autoComplete="off"
         rows={rows}
         required={required}
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
         {...props}
       />
     </div>

@@ -1,5 +1,4 @@
 import FilterAltIcon from "@icons/FilterAltIcon";
-import SearchIcon from "@icons/SearchIcon";
 import Delimiter from "@layouts/Delimiter";
 import { manageUrlParam } from "@lib/utils/urlParams";
 import { useEffect, useState } from "react";

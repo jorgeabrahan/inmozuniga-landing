@@ -70,7 +70,6 @@ export default function SectionPropertyFilters({
   const setFilter = useStorePropertyFilters((store) => store.setFilter);
   const setFilters = useStorePropertyFilters((store) => store.setFilters);
   const setAllFilters = useStorePropertyFilters((store) => store.setAllFilters);
-  const query = useStorePropertyFilters((store) => store.query);
   const setQuery = useStorePropertyFilters((store) => store.setQuery);
 
   const {

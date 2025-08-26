@@ -44,6 +44,7 @@ export default function ContactForm() {
       email: data.email.trim().toLowerCase(),
       phone: phoneNumber.number,
     };
+    console.log(formattedData);
   };
 
   return (

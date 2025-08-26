@@ -2,12 +2,10 @@ export const WhatsappIcon = ({
   id,
   className,
   size = "24px",
-  strokeWidth = "1",
 }: {
   id?: string;
   className?: string;
   size?: string;
-  strokeWidth?: string;
 }) => {
   return (
     <svg
