@@ -3,13 +3,10 @@ import { ServiceProjects } from "src/services/ServiceProjects";
 import Layout from "../layouts/Layout.astro";
 import { meta } from "../lib/constants/meta";
 import Delimiter from "@layouts/Delimiter.astro";
-import MainButton from "src/components/global/MainButton";
-import { SecondaryButton } from "src/components/global/SecondaryButton";
 import MapPinIcon from "@icons/MapPinIcon.astro";
 import ProjectCardLink from "src/components/global/project-card/ProjectCardLink.astro";
 import InfoCircleIcon from "@icons/InfoCircleIcon.astro";
 const { data } = await ServiceProjects.getProjects();
-console.log(data);
 ---
 
 <Layout
@@ -25,10 +22,10 @@ console.log(data);
         data.map((project) => (
           <div class="bg-white w-full h-[400px] md:h-[300px] rounded-xl grid md:grid-cols-12 lg:grid-cols-2 gap-4 border-2 border-[#e5e5e5] sticky top-32">
             <div class="p-4 flex flex-col justify-center md:col-span-7 lg:col-span-1 order-1 md:-order-1">
-              <h2 class="text-3xl font-semibold text-right mb-2">
+              <h2 class="text-3xl font-semibold md:text-right mb-2">
                 {project.title}
               </h2>
-              <p class="text-gray-500 text-right mb-4">
+              <p class="text-gray-500 md:text-right mb-4">
                 {project.metadata.description}
               </p>
             </div>
