@@ -80,23 +80,24 @@ export const PropertyQuoter = ({
         <label htmlFor="downPayment" className="font-semibold">
           Prima (Down Payment): ${form.downPayment.value.toLocaleString()}
         </label>
-        <Slider
-          min={minDownPayment}
-          max={totalPrice}
-          step={5000}
-          value={form.downPayment.value}
-          onChange={(value) => setValue(form.downPayment.id, Number(value))}
-          trackStyle={{ backgroundColor: "#c58700", height: 6 }}
-          handleStyle={{
-            borderColor: "#c58700",
-            backgroundColor: "#c58700",
-            height: 20,
-            width: 20,
-            marginTop: -7,
-          }}
-          railStyle={{ backgroundColor: "#e5e7eb", height: 6 }}
-        />
-
+        <div className="px-2">
+          <Slider
+            min={minDownPayment}
+            max={totalPrice}
+            step={5000}
+            value={form.downPayment.value}
+            onChange={(value) => setValue(form.downPayment.id, Number(value))}
+            trackStyle={{ backgroundColor: "#c58700", height: 6 }}
+            handleStyle={{
+              borderColor: "#c58700",
+              backgroundColor: "#c58700",
+              height: 20,
+              width: 20,
+              marginTop: -7,
+            }}
+            railStyle={{ backgroundColor: "#e5e7eb", height: 6 }}
+          />
+        </div>
         <div className="text-sm text-gray-500">
           Monto total de la propiedad: ${totalPrice.toLocaleString()}
         </div>

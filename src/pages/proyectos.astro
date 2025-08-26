@@ -1,14 +1,17 @@
 ---
+import { ServiceProjects } from "src/services/ServiceProjects";
 import Layout from "../layouts/Layout.astro";
 import { meta } from "../lib/constants/meta";
+const { data } = await ServiceProjects.getProjects();
+console.log(data);
 ---
 
 <Layout
-    title={meta.proyectos.title}
-    description={meta.proyectos.description}
-    keywords={meta.proyectos.keywords}
+  title={meta.proyectos.title}
+  description={meta.proyectos.description}
+  keywords={meta.proyectos.keywords}
 >
-    <main>
-        <p>Proyectos</p>
-    </main>
+  <main>
+    <p>Proyectos</p>
+  </main>
 </Layout>

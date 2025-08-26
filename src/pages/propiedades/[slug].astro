@@ -71,7 +71,7 @@ const price = isForSale ? prices.total : prices.installment;
         {
           data.metadata.availability.key ===
             PROPERTY_AVAILABILITY_KEYS.sale && (
-            <section class="rounded-2xl bg-white shadow-[0_0_15px_rgba(0,0,0,0.1)] p-8">
+            <section class="rounded-2xl bg-white shadow-[0_0_15px_rgba(0,0,0,0.1)] p-4 lg:p-8">
               <PropertyQuoter property={data} client:only="react" />
             </section>
           )

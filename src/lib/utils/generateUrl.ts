@@ -1,7 +1,7 @@
 import type { TypeCosmicProperty } from "@lib/types/Database";
 
 const waPropertyText = (property: TypeCosmicProperty) => `
-Estoy interesado en obtener información sobre esta propiedad que vi en su sitio web: http://inmozuniga.netlify.app/propiedades/${property.slug}
+Estoy interesado en obtener información sobre esta propiedad que vi en su sitio web: http://inmozuniga.com/propiedades/${property.slug}
 ¿Podría hablarme sobre los planes de pago y programar una visita guiada?
 `;
 
