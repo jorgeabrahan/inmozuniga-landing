@@ -11,13 +11,12 @@ import { PropertyDescription } from "src/components/page/property/PropertyDescri
 import { PropertyTag } from "src/components/page/property/PropertyTag";
 import { PROPERTY_AVAILABILITY_KEYS } from "@lib/constants/property";
 import { UtilsFormat } from "@lib/utils/UtilsFormat";
-import WhatsappIcon from "@icons/WhatsappIcon.astro";
-import PhoneIcon from "@icons/PhoneIcon.astro";
 import { HomeAltIcon } from "@icons/HomeAltIcon";
 import { LabelIcon } from "@icons/LabelIcon";
 import { HomeSaleIcon } from "@icons/HomeSaleIcon";
-import MainLinkAsButton from "src/components/global/MainLinkAsButton.astro";
-import { generatePropertyWaUrl } from "@lib/utils/generateUrl";
+import PropertyContactActions from "src/components/page/property/PropertyContactActions.astro";
+import PropertyTags from "src/components/page/property/PropertyTags.astro";
+import { PropertyQuoter } from "src/components/page/property/PropertyQuoter";
 
 const { slug } = Astro.params;
 const { data } = await ServiceProperties.getProperty(slug || "");
@@ -51,56 +50,53 @@ const price = isForSale ? prices.total : prices.installment;
       <PropertyTraits property={data} />
       <hr class="mb-8" />
       <div
-        class="rounded-xl overflow-hidden shadow-md"
+        class="rounded-xl overflow-hidden"
         set:html={data.metadata.location}
       />
     </div>
     <div class="lg:col-span-3 relative">
-      <section
-        class="rounded-2xl bg-white shadow-[0_0_15px_rgba(0,0,0,0.1)] sticky top-36 p-8"
-      >
-        <header class="flex flex-wrap items-stretch gap-2">
-          <PropertyTag className="bg-black text-white text-nowrap">
-            <LabelIcon size={14} />
-            En {data.metadata.availability.value}
-          </PropertyTag>
-          <PropertyTag>
-            <HomeSaleIcon size={14} />
-            {data.metadata.status.value}
-          </PropertyTag>
-          <PropertyTag>
-            <HomeAltIcon size={14} />
-            {data.metadata.category.value}
-          </PropertyTag>
-        </header>
-        <hr class="my-6" />
-        <p class="text-center">
-          <span class="text-4xl block font-emphasis">
+      <div class="lg:sticky top-36">
+        <section
+          class="hidden lg:block rounded-2xl bg-white shadow-[0_0_15px_rgba(0,0,0,0.1)] p-8 mb-8"
+        >
+          <PropertyTags data={data} />
+          <hr class="my-6" />
+          <p class="text-center">
+            <span class="text-4xl block font-emphasis">
+              {UtilsFormat.asCurrency(price)}
+            </span>
+            <span class="font-emphasis"
+              >{isForSale ? "Costo total" : "Cuota mensual"}</span
+            >
+          </p>
+          <hr class="my-6" />
+          <PropertyContactActions data={data} />
+        </section>
+        {
+          data.metadata.availability.key ===
+            PROPERTY_AVAILABILITY_KEYS.sale && (
+            <section class="rounded-2xl bg-white shadow-[0_0_15px_rgba(0,0,0,0.1)] p-8">
+              <PropertyQuoter property={data} client:only="react" />
+            </section>
+          )
+        }
+      </div>
+    </div>
+    <div
+      class="fixed z-20 p-3 bottom-0 left-0 right-0 w-full lg:hidden bg-white"
+    >
+      <PropertyTags data={data} className="mb-2" />
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="font-emphasis text-xs -mb-1">
+            {isForSale ? "Costo total" : "Cuota mensual"}
+          </p>
+          <p class="text-2xl block font-emphasis">
             {UtilsFormat.asCurrency(price)}
-          </span>
-          <span class="font-emphasis"
-            >{isForSale ? "Costo total" : "Cuota mensual"}</span
-          >
-        </p>
-        <hr class="my-6" />
-        <div class="flex items-stretch">
-          <MainLinkAsButton
-            url={generatePropertyWaUrl(data)}
-            target="_blank"
-            text="Contáctanos"
-            className="flex-1 rounded-r-none"
-            textClassName="flex items-center justify-center gap-2"
-          >
-            <WhatsappIcon />
-          </MainLinkAsButton>
-          <a
-            href={`tel:${data.metadata.agent_phone_number}`}
-            class="bg-black rounded-r-xl px-6 text-white flex items-center"
-          >
-            <PhoneIcon size="18" />
-          </a>
+          </p>
         </div>
-      </section>
+        <PropertyContactActions data={data} isMinimal />
+      </div>
     </div>
   </Delimiter>
 </Layout>

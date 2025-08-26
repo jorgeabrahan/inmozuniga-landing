@@ -1,0 +1,28 @@
+---
+import { LabelIcon } from "@icons/LabelIcon";
+import { PropertyTag } from "./PropertyTag";
+import { HomeSaleIcon } from "@icons/HomeSaleIcon";
+import { HomeAltIcon } from "@icons/HomeAltIcon";
+import type { TypeCosmicProperty } from "@lib/types/Database";
+
+interface Props {
+  data: TypeCosmicProperty;
+  className?: string;
+}
+const { data, className = "" } = Astro.props;
+---
+
+<div class={`flex flex-wrap items-stretch gap-2 ${className}`}>
+  <PropertyTag className="bg-black text-white text-nowrap">
+    <LabelIcon size={14} />
+    En {data.metadata.availability.value}
+  </PropertyTag>
+  <PropertyTag>
+    <HomeSaleIcon size={14} />
+    {data.metadata.status.value}
+  </PropertyTag>
+  <PropertyTag>
+    <HomeAltIcon size={14} />
+    {data.metadata.category.value}
+  </PropertyTag>
+</div>

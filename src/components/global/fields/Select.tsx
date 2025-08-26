@@ -38,7 +38,7 @@ export default function Select({
           </option>
         ))}
       </select>
-      <NavArrowDownIcon className="absolute top-[50%] right-4 -translate-y-[50%] text-black-800 pointer-events-none" />
+      <NavArrowDownIcon className="absolute top-[50%] right-4 -translate-y-[50%] text-black-800 pointer-events-none bg-white" />
     </div>
   );
 }

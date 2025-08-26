@@ -1,0 +1,31 @@
+---
+import PhoneIcon from "@icons/PhoneIcon.astro";
+import WhatsappIcon from "@icons/WhatsappIcon.astro";
+import type { TypeCosmicProperty } from "@lib/types/Database";
+import { generatePropertyWaUrl } from "@lib/utils/generateUrl";
+import MainLinkAsButton from "src/components/global/MainLinkAsButton.astro";
+
+interface Props {
+  data: TypeCosmicProperty;
+  isMinimal?: boolean;
+}
+const { data, isMinimal = false } = Astro.props;
+---
+
+<div class="flex items-stretch">
+  <MainLinkAsButton
+    url={generatePropertyWaUrl(data)}
+    target="_blank"
+    text={isMinimal ? "" : "Contáctanos"}
+    className={`${!isMinimal && "flex-1"} rounded-r-none`}
+    textClassName="flex items-center justify-center gap-2"
+  >
+    <WhatsappIcon size={isMinimal ? "20" : "24"} />
+  </MainLinkAsButton>
+  <a
+    href={`tel:${data.metadata.agent_phone_number}`}
+    class="bg-black rounded-r-xl px-6 text-white flex items-center"
+  >
+    <PhoneIcon size={isMinimal ? "16" : "18"} />
+  </a>
+</div>
