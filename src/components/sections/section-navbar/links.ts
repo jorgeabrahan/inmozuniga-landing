@@ -4,6 +4,10 @@ export const links = [
     text: "Inicio",
   },
   {
+    url: "/#contact-section",
+    text: "Contáctanos",
+  },
+  {
     url: "/propiedades",
     text: "Propiedades",
   },

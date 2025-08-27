@@ -19,7 +19,7 @@ export default function Textarea({
   ...props
 }: React.TextareaHTMLAttributes<HTMLTextAreaElement> & TextAreaProps) {
   return (
-    <div className="relative w-full">
+    <div className={`relative w-full ${props?.disabled && "opacity-40"}`}>
       <label
         htmlFor={id}
         className="absolute top-0 left-4 -translate-y-[45%] bg-white text-black-800 px-2 text-sm z-10"

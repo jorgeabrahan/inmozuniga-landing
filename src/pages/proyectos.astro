@@ -5,6 +5,7 @@ import { meta } from "../lib/constants/meta";
 import Delimiter from "@layouts/Delimiter.astro";
 import MapPinIcon from "@icons/MapPinIcon.astro";
 import ProjectCardLink from "src/components/global/project-card/ProjectCardLink.astro";
+import { ProjectDetails } from "src/components/page/projects/ProjectDetails";
 import InfoCircleIcon from "@icons/InfoCircleIcon.astro";
 const { data } = await ServiceProjects.getProjects();
 ---
@@ -44,10 +45,13 @@ const { data } = await ServiceProjects.getProjects();
                   <MapPinIcon size="20px" />
                   Ubicación
                 </ProjectCardLink>
-                <ProjectCardLink href="#">
+                <button
+                  class="text-sm flex items-center gap-1 hover:scale-105 transition-transform project-details-button"
+                  data-project-slug={project.slug}
+                >
                   <InfoCircleIcon size="20px" />
                   Detalles
-                </ProjectCardLink>
+                </button>
               </div>
             </figure>
           </div>
@@ -56,7 +60,7 @@ const { data } = await ServiceProjects.getProjects();
     </section>
     <aside class="-order-1 lg:order-1 col-span-3">
       <h1
-        class="text-6xl md:text-[6rem] mb-16 lg:mb-0 lg:text-[5rem] xl:text-[6rem] font-emphasis leading-[1.1] font-semibold lg:sticky top-32 flex flex-col justify-center"
+        class="text-6xl md:text-[6rem] mb-16 lg:mb-0 lg:text-[5rem] xl:text-[6rem] leading-[1.1] font-semibold lg:sticky top-32 flex flex-col justify-center"
       >
         Conoce
         <span class="text-harvest-gold">Nuestros</span>
@@ -64,4 +68,27 @@ const { data } = await ServiceProjects.getProjects();
       </h1>
     </aside>
   </Delimiter>
+  <ProjectDetails allProjects={data} client:only="react" />
 </Layout>
+
+<script>
+  const projectDetailsButtons = document.querySelectorAll(
+    ".project-details-button",
+  );
+  projectDetailsButtons.forEach((projectDetailsButton) => {
+    projectDetailsButton?.addEventListener("click", () => {
+      const projectSlug =
+        projectDetailsButton.getAttribute("data-project-slug");
+      window.history.pushState(null, "", `?projectSlug=${projectSlug}`);
+    });
+  });
+
+  (function (history) {
+    const pushState = history.pushState;
+    history.pushState = function (state, title, url) {
+      const result = pushState.apply(history, [state, title, url]);
+      window.dispatchEvent(new Event("locationchange"));
+      return result;
+    };
+  })(window.history);
+</script>

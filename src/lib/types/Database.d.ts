@@ -53,10 +53,17 @@ export interface TypeProperty {
 export type TypeCosmicProperty = TypeCosmicObject<TypeProperty>;
 export interface TypeProject {
   description: string;
+  long_description: string;
   minimum_salary: number;
   coordinates: {
     latitude: string;
     longitude: string;
   };
+  images: {
+    image: {
+      url: string;
+      imgix_url: string;
+    };
+  }[];
 }
 export type TypeCosmicProject = TypeCosmicObject<TypeProject>;

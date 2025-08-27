@@ -39,7 +39,7 @@ export default function Input({
     }
   }, [type]);
   return (
-    <div>
+    <div className={props?.disabled ? "opacity-40" : ""}>
       <div
         className={`relative w-full mb-[6px] ${groupClassName}`}
         data-group-id={id}

@@ -16,7 +16,7 @@ export default function Select({
 }: React.SelectHTMLAttributes<HTMLSelectElement> & SelectProps) {
   return (
     <div
-      className="relative w-full"
+      className={`relative w-full ${props?.disabled && "opacity-40"}`}
       data-id="custom-select-wrapper"
       data-is-open="false"
     >
