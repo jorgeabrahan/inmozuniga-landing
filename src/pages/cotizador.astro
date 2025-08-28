@@ -1,0 +1,22 @@
+---
+import Delimiter from "@layouts/Delimiter.astro";
+import Layout from "@layouts/Layout.astro";
+import { FormQuoter } from "src/components/page/quoter/FormQuoter";
+import { SectionAvailableProperties } from "src/components/page/quoter/SectionAvailableProperties";
+import { meta } from "@lib/constants";
+---
+
+<Layout
+  title={meta.cotizador.title}
+  description={meta.cotizador.description}
+  keywords={meta.cotizador.keywords}
+>
+  <Delimiter className="flex flex-col lgx:flex-row gap-6 relative mt-10">
+    <div
+      class="w-full lgx:max-w-[350px] h-max lgx:p-6 lgx:rounded-2xl lgx:shadow-[0_0_14px_#00000022]"
+    >
+      <FormQuoter client:only="react" />
+    </div>
+    <SectionAvailableProperties client:only="react" />
+  </Delimiter>
+</Layout>

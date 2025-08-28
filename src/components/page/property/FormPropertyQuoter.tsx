@@ -5,37 +5,13 @@ import "rc-slider/assets/index.css";
 import Select from "src/components/global/fields/Select";
 import useForm from "use-managed-form";
 import { UtilsFormat } from "@lib/utils/UtilsFormat";
+import {
+  FINANCING_FUND_OPTIONS,
+  FINANCING_FUND_PERCENTAGES,
+  LOAN_TERM_OPTIONS,
+} from "@lib/constants/quoter";
 
-const financingFundOptions = [
-  {
-    label: "BANHPROVI - Vivienda social (≈ 4% anual)",
-    value: "banhprovi_social",
-  },
-  {
-    label: "BANHPROVI - Clase media (≈ 7% anual)",
-    value: "banhprovi_media",
-  },
-  {
-    label: "Fondos propios / Banco privado (≈ 8-9% anual)",
-    value: "fondos_propios",
-  },
-  { label: "RAP (≈ 10% anual)", value: "rap" },
-];
-const financingFundPercentages = {
-  rap: 0.1,
-  banhprovi_social: 0.04,
-  banhprovi_media: 0.07,
-  fondos_propios: 0.085,
-};
-const loanTermOptions = [
-  { label: "30 años", value: "30" },
-  { label: "25 años", value: "25" },
-  { label: "20 años", value: "20" },
-  { label: "15 años", value: "15" },
-  { label: "10 años", value: "10" },
-  { label: "5 años", value: "5" },
-];
-export const PropertyQuoter = ({
+export const FormPropertyQuoter = ({
   property,
 }: {
   property: TypeCosmicProperty;
@@ -45,8 +21,8 @@ export const PropertyQuoter = ({
 
   const { form, financingFund, loanTerm, downPayment, onChange, setValue } =
     useForm({
-      financingFund: financingFundOptions[0].value,
-      loanTerm: loanTermOptions[0].value,
+      financingFund: FINANCING_FUND_OPTIONS[0].value,
+      loanTerm: LOAN_TERM_OPTIONS[0].value,
       downPayment: minDownPayment,
     });
   const [quoteDetails, setQuoteDetails] = useState({
@@ -57,8 +33,8 @@ export const PropertyQuoter = ({
     if (isNaN(downPayment)) return;
     const financedAmount = totalPrice - form.downPayment.value;
     const annualRate =
-      financingFundPercentages[
-        financingFund as keyof typeof financingFundPercentages
+      FINANCING_FUND_PERCENTAGES[
+        financingFund as keyof typeof FINANCING_FUND_PERCENTAGES
       ] || 0.1;
     const monthlyRate = annualRate / 12;
     const numberOfPayments = Number(loanTerm) * 12;
@@ -106,7 +82,7 @@ export const PropertyQuoter = ({
       <Select
         id={form.financingFund.id}
         label="Fondo de financiamiento"
-        options={financingFundOptions}
+        options={FINANCING_FUND_OPTIONS}
         value={form.financingFund.value}
         onChange={onChange}
       />
@@ -114,7 +90,7 @@ export const PropertyQuoter = ({
       <Select
         id={form.loanTerm.id}
         label="Plazo del préstamo"
-        options={loanTermOptions}
+        options={LOAN_TERM_OPTIONS}
         value={form.loanTerm.value}
         onChange={onChange}
       />
