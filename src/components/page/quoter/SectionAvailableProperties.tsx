@@ -1,7 +1,6 @@
 import { PROPERTY_AVAILABILITY_KEYS } from "@lib/constants/property";
-import type { TypeCosmicProperty } from "@lib/types/Database";
 import { UtilsFormat } from "@lib/utils/UtilsFormat";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import PropertyCard from "src/components/global/property-card/PropertyCard";
 import { ServiceProperties } from "src/services/ServiceProperties";
 import { useStoreProperties } from "src/stores/useStoreProperties";

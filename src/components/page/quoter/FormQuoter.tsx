@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import Select from "src/components/global/fields/Select";
 import Input from "src/components/global/fields/Input";
 import useForm from "use-managed-form";
-import { UtilsFormat } from "@lib/utils/UtilsFormat";
 import {
   FINANCING_FUND_OPTIONS,
   FINANCING_FUND_PERCENTAGES,
