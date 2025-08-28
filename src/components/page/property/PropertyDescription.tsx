@@ -3,12 +3,28 @@ import Delimiter from "@layouts/Delimiter";
 import { useEffect, useState, useMemo } from "react";
 import { SecondaryButton } from "src/components/global/SecondaryButton";
 
-const getFirstElements = (html: string, count = 2): string => {
+const getFirstElements = (html: string, count = 1): string => {
   if (!html) return "";
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, "text/html");
-  const elements = Array.from(doc.body.children).slice(0, count);
-  return elements.map((el) => el.outerHTML).join("") || html;
+
+  const children = Array.from(doc.body.children);
+  const elementsToKeep = [];
+  let countableElementsFound = 0;
+
+  for (const child of children) {
+    elementsToKeep.push(child);
+    if (
+      child.tagName.toLowerCase() !== "br" &&
+      child.outerHTML.trim().toLowerCase() !== "<p><br></p>"
+    ) {
+      countableElementsFound++;
+    }
+    if (countableElementsFound >= count) {
+      break;
+    }
+  }
+  return elementsToKeep.map((el) => el.outerHTML).join("") || html;
 };
 
 export const PropertyDescription = ({
@@ -20,7 +36,7 @@ export const PropertyDescription = ({
     useState(false);
 
   const previewDescription = useMemo(
-    () => getFirstElements(description, 2),
+    () => getFirstElements(description, 1),
     [description],
   );
 
