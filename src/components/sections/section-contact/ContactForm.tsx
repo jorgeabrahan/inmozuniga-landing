@@ -48,7 +48,7 @@ export default function ContactForm() {
     };
     setIsSendingEmail(true);
     try {
-      const response = await fetch("https://formspree.io/f/mpwjwpra", {
+      const response = await fetch("https://formspree.io/f/xblabjqp", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: JSON.stringify(formattedData),
